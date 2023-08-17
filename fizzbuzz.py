@@ -7,4 +7,6 @@ for current in range(1, input + 1):
             continue
         print(f"{current} Fizz")
     elif current % 5 == 0:
-        print(f"{current} Fuzz")
+        print(f"{current} Buzz")
+    else:
+        print(current)
