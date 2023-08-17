@@ -1,4 +1,4 @@
-input = 'apple 111123123'
+input = 'apple 1 1 1 1 2 3 1 231111'
 
 seen = {}
 max_so_far = 0
@@ -11,4 +11,7 @@ for char in input:
             max_char = char
     else:
         seen[char] = 1
-print(max_char)
+if max_char == ' ':
+    print('White space')
+else:
+    print(max_char)
