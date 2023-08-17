@@ -1,11 +1,16 @@
 import math
 
-input = 54321
+input = 901201
 
 result = ''
+if input < 0:
+    input = -input
+    result = '-'
+
 current_num = input % 10
-while current_num != 0:
+while input != 0:
     result += str(current_num)
     input = math.floor(input / 10)
     current_num = input % 10
+
 print(int(result))
