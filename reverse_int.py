@@ -1,9 +1,12 @@
 import math
 
-input = 901201
+input = 121
 
 result = ''
-if input < 0:
+if input == 0:
+    print(0)
+    exit()
+elif input < 0:
     input = -input
     result = '-'
 
