@@ -16,12 +16,12 @@ def _helper(max, current=1):
     """
     Print each odd row.
     """
+    if current % 2 != 0:
+        num_spaces = int((max - current)/2)
+        print(">" + num_spaces * " " + current * "#" + num_spaces * " " + "<")
     if max == current:
         exit()
-    if current % 2 != 0:
-        num_spaces = max - current
-        print(">" + num_spaces * " " + current * "#" + num_spaces * " " + "<")
     _helper(max, current + 1)
 
 
-pyramid(3)
+pyramid(10)
