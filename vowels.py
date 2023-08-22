@@ -2,6 +2,6 @@ import re
 
 input = 'asdfasdfasdfsdfasdf'
 
-result = re.findall(r'[aeiou]', input)
+result = re.findall(r'[aeiouAEIOU]', input)
 
 print(len(result))
