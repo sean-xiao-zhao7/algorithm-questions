@@ -13,9 +13,6 @@ def make_spiral_matrix(width):
 
     _matrix_helper(matrix, 0, 0, width, width)
 
-    for row in matrix:
-        print(row)
-
 
 def _matrix_helper(matrix, top, left, bottom, right, current_num=1):
     """
@@ -28,20 +25,34 @@ def _matrix_helper(matrix, top, left, bottom, right, current_num=1):
         matrix[top][x] = current_num
         current_num += 1
 
+    _print_matrix(matrix)
+
     for y in range(top + 1, bottom):
-        matrix[right][y] = current_num
+        matrix[y][right - 1] = current_num
         current_num += 1
 
-    for x in range(right - 1, left, -1):
-        matrix[bottom][x] = current_num
+    _print_matrix(matrix)
+
+    for x in range(right - 2, left - 1, -1):
+        matrix[bottom - 1][x] = current_num
         current_num += 1
 
-    for y in range(bottom + 1, top + 1, -1):
-        matrix[left][y] = current_num
+    _print_matrix(matrix)
+
+    for y in range(bottom - 2, top, -1):
+        matrix[y][left] = current_num
         current_num += 1
+
+    _print_matrix(matrix)
 
     _matrix_helper(matrix, top + 1, left + 1,
                    bottom + 1, right + 1, current_num)
+
+
+def _print_matrix(matrix):
+    for row in matrix:
+        print(row)
+    print('')
 
 
 if __name__ == '__main__':
