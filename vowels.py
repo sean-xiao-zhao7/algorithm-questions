@@ -1,6 +1,6 @@
 import re
 
-input = 'asdfasdfasdfsdfasdf'
+input = '123123123123123a'
 
 result = re.findall(r'[aeiouAEIOU]', input)
 
