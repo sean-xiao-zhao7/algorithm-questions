@@ -1,4 +1,4 @@
-input = 3
+input = 6
 
 
 def make_spiral_matrix(width):
@@ -13,40 +13,34 @@ def make_spiral_matrix(width):
 
     _matrix_helper(matrix, 0, 0, width, width)
 
+    _print_matrix(matrix)
+
 
 def _matrix_helper(matrix, top, left, bottom, right, current_num=1):
     """
     Recursively fill the empty matrix of zeros with correct numbers.
     """
     if top > bottom or left > right:
-        exit()
+        return
 
     for x in range(left, right):
         matrix[top][x] = current_num
         current_num += 1
 
-    _print_matrix(matrix)
-
     for y in range(top + 1, bottom):
         matrix[y][right - 1] = current_num
         current_num += 1
-
-    _print_matrix(matrix)
 
     for x in range(right - 2, left - 1, -1):
         matrix[bottom - 1][x] = current_num
         current_num += 1
 
-    _print_matrix(matrix)
-
     for y in range(bottom - 2, top, -1):
         matrix[y][left] = current_num
         current_num += 1
 
-    _print_matrix(matrix)
-
     _matrix_helper(matrix, top + 1, left + 1,
-                   bottom + 1, right + 1, current_num)
+                   bottom - 1, right - 1, current_num)
 
 
 def _print_matrix(matrix):
