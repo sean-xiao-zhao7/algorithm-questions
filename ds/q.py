@@ -15,25 +15,22 @@ class Queue:
 
     def remove(self):
         """
-        Remove the last item from the queue.                
+        Remove the last item from the queue.
         """
-        try:
-            temp_stack = Stack()
+        temp_stack = Stack()
+        current_stack_item = self.stack.pop()
+        while current_stack_item:
+            temp_stack.push(current_stack_item)
             current_stack_item = self.stack.pop()
-            while current_stack_item:
-                temp_stack.push(current_stack_item)
-                current_stack_item = self.stack.pop()
 
-            return_item = temp_stack.pop()
+        return_item = temp_stack.pop()
 
+        current_stack_item = temp_stack.pop()
+        while current_stack_item:
+            self.stack.push(current_stack_item)
             current_stack_item = temp_stack.pop()
-            while current_stack_item:
-                self.stack.push(current_stack_item)
-                current_stack_item = temp_stack.pop()
 
-            return return_item
-        except IndexError:
-            return False
+        return return_item
 
     def weave(self, queue2):
         """
@@ -52,7 +49,7 @@ class Queue:
             if item2:
                 new_queue.add(item2)
                 item2 = queue2.remove()
-        self.queue = new_queue
+        self.stack = new_queue
 
     def __repr__(self):
         """
@@ -69,5 +66,5 @@ if __name__ == '__main__':
             q2.add(item)
         else:
             q1.add(item)
-    # q1.weave(q2)
+    q1.weave(q2)
     print(q1)
