@@ -1,4 +1,4 @@
-input = 6
+input = 11
 
 
 def make_spiral_matrix(width):
