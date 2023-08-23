@@ -1,6 +1,9 @@
+from stack import Stack
+
+
 class Queue:
     def __init__(self):
-        self.queue = []
+        self.stack = Stack()
 
     def add(self, input):
         """
@@ -8,14 +11,27 @@ class Queue:
         Param:
         input (int): the integer to be added.
         """
-        self.queue.insert(0, input)
+        self.stack.push(input)
 
     def remove(self):
         """
         Remove the last item from the queue.                
         """
         try:
-            return self.queue.pop()
+            temp_stack = Stack()
+            current_stack_item = self.stack.pop()
+            while current_stack_item:
+                temp_stack.push(current_stack_item)
+                current_stack_item = self.stack.pop()
+
+            return_item = temp_stack.pop()
+
+            current_stack_item = temp_stack.pop()
+            while current_stack_item:
+                self.stack.push(current_stack_item)
+                current_stack_item = temp_stack.pop()
+
+            return return_item
         except IndexError:
             return False
 
@@ -42,7 +58,7 @@ class Queue:
         """
         Print the queue for debugging.
         """
-        return str(self.queue)
+        return str(self.stack)
 
 
 if __name__ == '__main__':
@@ -53,5 +69,5 @@ if __name__ == '__main__':
             q2.add(item)
         else:
             q1.add(item)
-    q1.weave(q2)
+    # q1.weave(q2)
     print(q1)
