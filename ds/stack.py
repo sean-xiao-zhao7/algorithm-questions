@@ -1,4 +1,3 @@
-
 class Stack:
     def __init__(self) -> None:
         self.stack = []
@@ -15,7 +14,10 @@ class Stack:
         """
         Return the first item and remove it from the stack.
         """
-        self.stack.pop(0)
+        try:
+            return self.stack.pop(0)
+        except IndexError:
+            return False
 
     def __repr__(self):
         """
@@ -25,4 +27,9 @@ class Stack:
 
 
 if __name__ == '__main__':
-    pass
+    s = Stack()
+    for i in range(10):
+        s.push(i)
+    print(s)
+    print(s.pop())
+    print(s)
