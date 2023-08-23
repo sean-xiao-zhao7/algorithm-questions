@@ -13,9 +13,20 @@ class Stack:
     def pop(self):
         """
         Return the first item and remove it from the stack.
+        Return False if empty stack.
         """
         try:
             return self.stack.pop(0)
+        except IndexError:
+            return False
+
+    def peek(self):
+        """
+        Return the top item without removing it.
+        Return False if empty stack.
+        """
+        try:
+            return self.stack[0]
         except IndexError:
             return False
 
