@@ -9,6 +9,10 @@ class LinkedListNode(Node):
         value (any): the value this node contains.
     """
 
+    def __init__(self, value) -> None:
+        super().__init__(value)
+        self.next = None
+
     @property
     def next(self):
         return self._next
