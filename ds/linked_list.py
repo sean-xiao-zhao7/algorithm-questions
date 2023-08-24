@@ -9,10 +9,18 @@ class LinkedList:
     def head(self):
         return self._head
 
+    @head.setter
+    def head(self, node):
+        self._head = node
+
     def insertFirst(self, value):
         newNode = LinkedListNode(value)
         if not self.head:
             self.head = newNode
+        else:
+            temp = self.head
+            self.head = newNode
+            self.head.next = temp
 
     def __repr__(self) -> str:
         if not self.head:
@@ -22,9 +30,12 @@ class LinkedList:
         while current_node:
             result += ' -> '
             result += str(current_node)
+            current_node = current_node.next
         return result
 
 
 if __name__ == '__main__':
     llist1 = LinkedList()
+    llist1.insertFirst(1)
+    llist1.insertFirst(2)
     print(llist1)

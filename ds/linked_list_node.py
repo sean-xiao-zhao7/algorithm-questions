@@ -11,7 +11,7 @@ class LinkedListNode(Node):
 
     def __init__(self, value) -> None:
         super().__init__(value)
-        self.next = None
+        self._next = None
 
     @property
     def next(self):
@@ -19,7 +19,7 @@ class LinkedListNode(Node):
 
     @next.setter
     def next(self, node):
-        if not self.next:
-            self.next = node
+        if not self._next:
+            self._next = node
         else:
             return False
