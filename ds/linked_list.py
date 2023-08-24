@@ -1,4 +1,3 @@
-import copy
 from linked_list_node import LinkedListNode
 
 
@@ -7,6 +6,7 @@ class LinkedList:
         self._head = None
         self._size = 0
         self._tail = None
+        self._current_node = None
 
     @property
     def head(self):
@@ -98,6 +98,17 @@ class LinkedList:
             current_node = current_node.next
         return result
 
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.head:
+            value = self.head
+            self.head = self.head.next
+            return value
+        else:
+            raise StopIteration
+
 
 if __name__ == '__main__':
     llist1 = LinkedList()
@@ -106,7 +117,6 @@ if __name__ == '__main__':
     llist1.insertLast(0)
     llist1.insertLast(-1)
     llist1.insertFirst(3)
-    print(llist1.getLast())
-    print(llist1.getFirst())
-    print(llist1.removeFirst())
-    print(llist1)
+    llist1.insertLast(-2)
+    for node in llist1:
+        print(node)
