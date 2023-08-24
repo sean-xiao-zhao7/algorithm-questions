@@ -6,7 +6,6 @@ class LinkedList:
         self._head = None
         self._size = 0
         self._tail = None
-        self._current_node = None
 
     @property
     def head(self):

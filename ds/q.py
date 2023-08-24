@@ -2,6 +2,9 @@ from stack import Stack
 
 
 class Queue:
+    """
+    FIFO Queue using 2 FILO stacks.
+    """
     def __init__(self):
         self.stack = Stack()
 
