@@ -76,6 +76,17 @@ class LinkedList:
         else:
             return False
 
+    def removeFirst(self):
+        """
+        Remove and return the first (left most) node.
+        """
+        if not self.head:
+            return False
+        else:
+            temp = self.head
+            self.head = self.head.next
+            return temp
+
     def __repr__(self) -> str:
         if not self.head:
             return 'No nodes.'
@@ -97,4 +108,5 @@ if __name__ == '__main__':
     llist1.insertFirst(3)
     print(llist1.getLast())
     print(llist1.getFirst())
+    print(llist1.removeFirst())
     print(llist1)
