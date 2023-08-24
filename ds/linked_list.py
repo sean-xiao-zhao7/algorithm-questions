@@ -1,4 +1,4 @@
-from linked_list_node import LinkedListNode
+from ds.linked_list_node import LinkedListNode
 
 
 class LinkedList:
