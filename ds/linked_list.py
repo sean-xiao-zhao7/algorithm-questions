@@ -67,6 +67,15 @@ class LinkedList:
         else:
             return False
 
+    def getLast(self):
+        """
+        Return a single node at the end (right most) of the list.
+        """
+        if self.tail:
+            return self.tail
+        else:
+            return False
+
     def __repr__(self) -> str:
         if not self.head:
             return 'No nodes.'
@@ -86,4 +95,6 @@ if __name__ == '__main__':
     llist1.insertLast(0)
     llist1.insertLast(-1)
     llist1.insertFirst(3)
+    print(llist1.getLast())
+    print(llist1.getFirst())
     print(llist1)
