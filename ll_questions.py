@@ -25,9 +25,24 @@ def verify_circular(ll):
     return False
 
 
+def from_last(ll, n):
+    """
+    Return the node in a LL that is n nodes away from the end.
+    This method does not make use of the length of the LL.
+    """
+    first_pointer = ll.head
+    second_pointer = ll.head
+    for i in range(n):
+        second_pointer = second_pointer.next
+    while second_pointer.next:
+        first_pointer = first_pointer.next
+        second_pointer = second_pointer.next
+    return first_pointer
+
+
 if __name__ == '__main__':
     ll = LinkedList()
     for i in range(10):
         ll.insertFirst(i)
-    ll.tail.next = ll.head
-    print(ll.verify_circular())
+    print(ll)
+    print(from_last(ll, 2))
