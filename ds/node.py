@@ -11,10 +11,15 @@ class Node:
     """
 
     def __init__(self, value) -> None:
-        self.value = value
+        self._value = value
 
-    def set(self, value):
-        self.value = value
+    @property
+    def value(self, value):
+        self._value = value
+
+    @value.getter
+    def value(self):
+        return self._value
 
     def __repr__(self) -> str:
         return f'[{self.value}]'
