@@ -86,7 +86,22 @@ class LinkedList:
             self.head = self.head.next
             return temp
 
+    def verify_circular(self):
+        """
+        Return true if self is circular.
+        """
+        first_pointer = self.head
+        second_pointer = self.head
+        while second_pointer.next and second_pointer.next.next:
+            first_pointer = first_pointer.next
+            second_pointer = second_pointer.next.next
+            if first_pointer == second_pointer:
+                return True
+        return False
+
     def __repr__(self) -> str:
+        if self.verify_circular():
+            return 'Circular linked list detected.'
         if not self.head:
             return 'No nodes.'
         result = str(self.head)

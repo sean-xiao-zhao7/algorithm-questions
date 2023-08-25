@@ -29,5 +29,5 @@ if __name__ == '__main__':
     ll = LinkedList()
     for i in range(10):
         ll.insertFirst(i)
-    # ll.tail.next = ll.head
-    print(verify_circular(ll))
+    ll.tail.next = ll.head
+    print(ll.verify_circular())
