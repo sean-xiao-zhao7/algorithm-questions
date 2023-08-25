@@ -1,4 +1,4 @@
-from ds.node import Node
+from node import Node
 from errors.ChildExistError import ChildExistError
 
 
@@ -17,7 +17,7 @@ class TreeNode(Node):
 
     def addChild(self, value):
         newTreeNode = TreeNode(value)
-        if self.children[value]:
+        if value in self.children:
             raise ChildExistError(value)
         self.children[value] = newTreeNode
 
