@@ -1,4 +1,4 @@
-from tree_node import TreeNode
+from ds.tree_node import TreeNode
 
 
 class Tree:
