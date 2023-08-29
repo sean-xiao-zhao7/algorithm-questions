@@ -17,13 +17,15 @@ def level_width_helper(current_parent_node, result=[1]):
     result.insert(0, len(current_children))
 
     for child in current_children:
-        return level_width_helper(child, result)
+        level_width_helper(child, result)
+
+    return result
 
 
 if __name__ == '__main__':
     tree = Tree(0)
-    for i in range(1, 5):
+    for i in range(5):
         tree.root.addChild(i)
-        for j in range(i, 5):
+        for j in range(5):
             tree.root.children[i].addChild(j)
     print(level_width(tree))
