@@ -2,24 +2,21 @@ from ds.tree import Tree
 
 
 def level_width(tree):
-    root_node = tree.root
-    return level_width_helper(root_node)
+    result = [1]
+    level_width_helper(tree.root, result)
+    return result
 
 
-def level_width_helper(current_parent_node, result=[1]):
+def level_width_helper(current_parent_node, result):
     """
     Recursively complete the list showing each tree level's children count.
     """
-    if current_parent_node.children == {}:
-        return result
-
-    current_children = current_parent_node.children.values()
-    result.insert(0, len(current_children))
-
-    for child in current_children:
-        level_width_helper(child, result)
-
-    return result
+    if current_parent_node.children != {}:
+        total = 0
+        for child in current_parent_node.children.values():
+            total += 1
+            level_width_helper(child, result)
+        result.insert(0, total)
 
 
 if __name__ == '__main__':
