@@ -2,7 +2,7 @@ from ds.tree import Tree
 
 
 def level_width(tree):
-    root_node = tree.root()
+    root_node = tree.root
     return level_width_helper(root_node)
 
 
@@ -10,12 +10,14 @@ def level_width_helper(current_parent_node, result=[1]):
     """
     Recursively complete the list showing each tree level's children count.
     """
+    if current_parent_node.children == {}:
+        return result
+
     current_children = current_parent_node.children.values()
     result.insert(0, len(current_children))
 
     for child in current_children:
-        current_children = child.children.values()
-        result.insert(0, len(current_children))
+        return level_width_helper(child, result)
 
 
 if __name__ == '__main__':
