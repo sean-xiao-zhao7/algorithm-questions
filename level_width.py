@@ -10,7 +10,10 @@ def level_width(current_node, widths, level):
     widths (Dict key(int): value(int)): dict that contains levels and corresponding widths
     """
     children_count = len(current_node.children.values())
-    if level in widths:
+    if children_count <= 0:
+        # leaf node
+        return
+    elif level in widths:
         widths[level] += children_count
     else:
         widths[level] = children_count
