@@ -1,5 +1,5 @@
-from ds.node import Node
-from ds.errors.ChildExistError import ChildExistError
+from node import Node
+from errors.ChildExistError import ChildExistError
 
 
 class TreeNode(Node):

@@ -1,5 +1,5 @@
-from ds.tree import Tree
-from ds.bst_tree_node import BSTTreeNode
+from tree import Tree
+from bst_tree_node import BSTTreeNode
 
 
 class BinarySearchTree(Tree):
@@ -13,8 +13,9 @@ class BinarySearchTree(Tree):
 
 if __name__ == '__main__':
     tree = BinarySearchTree(0)
-    for i in range(1, 5):
+    for i in range(2):
         tree.root.addChild(i)
-        for j in range(i, 5):
-            tree.root.children[i].addChild(j)
+    for j, child in enumerate(tree.root.children.values()):
+        for i in range(2):
+            child.addChild(i)
     tree.breadthFirstTraverse()
