@@ -10,7 +10,8 @@ class BSTTreeNode(TreeNode):
         """
         Respect the BST
         """
-        newTreeNode = TreeNode(value)
+        print('BSTTreeNode')
+        newTreeNode = BSTTreeNode(value)
         if value <= self.value:
             self.children['left'] = newTreeNode
         else:

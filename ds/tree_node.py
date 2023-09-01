@@ -16,6 +16,7 @@ class TreeNode(Node):
         self.children = {}
 
     def addChild(self, value):
+        print('TreeNode')
         newTreeNode = TreeNode(value)
         if value in self.children:
             raise ChildExistError(value)
