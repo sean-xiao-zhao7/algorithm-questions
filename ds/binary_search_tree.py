@@ -41,8 +41,12 @@ class BinarySearchTree(Tree):
             if current_node.value == value:
                 return True
             elif current_node.value < value:
+                if 'right' not in current_node.children:
+                    return False
                 current_node = current_node.children['right']
             else:
+                if 'left' not in current_node.children:
+                    return False
                 current_node = current_node.children['left']
 
 
@@ -51,4 +55,4 @@ if __name__ == '__main__':
     for i in range(10):
         tree.addChildBST(i)
     tree.breadthFirstTraverse()
-    tree.search(5)
+    print(tree.search(5))
