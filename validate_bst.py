@@ -14,10 +14,11 @@ def validateBST(tree):
         nodes_this_level = []
         for current_node in nodes_this_level:
             nodes_this_level + current_node.children.values()
+    return True
 
 
 if __name__ == '__main__':
     tree = BinarySearchTree(0)
     for i in range(10):
         tree.addChildBST(i)
-    validateBST(tree)
+    print(validateBST(tree))
