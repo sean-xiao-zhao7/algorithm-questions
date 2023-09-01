@@ -30,9 +30,25 @@ class BinarySearchTree(Tree):
                     break
         target_node.addChild(value)
 
+    def search(self, value):
+        """
+        Returns True if node with value exists in this BST.
+        Params:
+        value (int): the desired value.
+        """
+        current_node = self.root
+        while current_node.children != {}:
+            if current_node.value == value:
+                return True
+            elif current_node.value < value:
+                current_node = current_node.children['right']
+            else:
+                current_node = current_node.children['left']
+
 
 if __name__ == '__main__':
     tree = BinarySearchTree(0)
     for i in range(10):
         tree.addChildBST(i)
     tree.breadthFirstTraverse()
+    tree.search(5)
