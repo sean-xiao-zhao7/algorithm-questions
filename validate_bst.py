@@ -7,11 +7,11 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
     Return True if tree is true BST.
     """
 
+    print('\n')
     print(f'Node: {current_node.value}')
     print(f'Children: {current_node.children}')
     print(f'Left Parents: {left_parents}')
     print(f'Right Parents: {right_parents}')
-    print('\n')
 
     if 'left' not in current_node.children \
             and 'right' not in current_node.children:
@@ -37,21 +37,23 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
     result_right = True
     # register current node in the parent history
     if 'left' in current_node.children:
-        right_parents.append(current_node.value)
+        new_right_parents = right_parents.copy()
+        new_right_parents.append(current_node.value)
         result_left = validateBST(
-            current_node.children['left'], left_parents, right_parents)
+            current_node.children['left'], left_parents, new_right_parents)
     if 'right' in current_node.children:
-        left_parents.append(current_node.value)
+        new_left_parents = left_parents.copy()
+        new_left_parents.append(current_node.value)
         result_right = validateBST(
-            current_node.children['right'], left_parents, right_parents)
+            current_node.children['right'], new_left_parents, right_parents)
 
     return result_left and result_right
 
 
 if __name__ == '__main__':
-    tree = BinarySearchTree(0)
+    tree = BinarySearchTree(randint(1, 50))
     for i in range(1, 10):
         new_node_value = randint(1, 50)
-        print(new_node_value)
+        print(f'Inserting {new_node_value}')
         tree.addChildBST(new_node_value)
     print(validateBST(tree.root))

@@ -12,6 +12,8 @@ class BSTTreeNode(TreeNode):
         """
         newTreeNode = BSTTreeNode(value)
         if value <= self.value:
+            print(f'Inserted {value} to the left.')
             self.children['left'] = newTreeNode
         else:
+            print(f'Inserted {value} to the right.')
             self.children['right'] = newTreeNode

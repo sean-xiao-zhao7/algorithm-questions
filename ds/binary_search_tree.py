@@ -17,6 +17,7 @@ class BinarySearchTree(Tree):
         value (int): value of the new node.
         """
         target_node = self.root
+        print(f'Target node: {target_node}')
         while target_node.children != {}:
             if target_node.value > value:
                 if 'left' in target_node.children:
@@ -28,6 +29,7 @@ class BinarySearchTree(Tree):
                     target_node = target_node.children['right']
                 else:
                     break
+            print(f'Target node: {target_node}')
         target_node.addChild(value)
 
     def search(self, value):
