@@ -1,3 +1,4 @@
+from random import randint
 from ds.binary_search_tree import BinarySearchTree
 
 
@@ -7,8 +8,14 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
     """
 
     print(f'Node: {current_node.value}')
+    print(f'Children: {current_node.children}')
     print(f'Left Parents: {left_parents}')
     print(f'Right Parents: {right_parents}')
+    print('\n')
+
+    if 'left' not in current_node.children \
+            and 'right' not in current_node.children:
+        return True
 
     # verify children adhere to BST
     if 'left' in current_node.children and \
@@ -44,5 +51,7 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
 if __name__ == '__main__':
     tree = BinarySearchTree(0)
     for i in range(1, 10):
-        tree.addChildBST(i)
+        new_node_value = randint(1, 50)
+        print(new_node_value)
+        tree.addChildBST(new_node_value)
     print(validateBST(tree.root))
