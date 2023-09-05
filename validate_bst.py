@@ -6,6 +6,10 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
     Return True if tree is true BST.
     """
 
+    print(f'Node: {current_node.value}')
+    print(f'Left Parents: {left_parents}')
+    print(f'Right Parents: {right_parents}')
+
     # verify children adhere to BST
     if 'left' in current_node.children and \
             current_node.children['left'].value > current_node.value:
@@ -22,6 +26,8 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
         if not all(current_node.value >= element for element in left_parents):
             return False
 
+    result_left = True
+    result_right = True
     # register current node in the parent history
     if 'left' in current_node.children:
         right_parents.append(current_node.value)
@@ -37,6 +43,6 @@ def validateBST(current_node, left_parents=[], right_parents=[]):
 
 if __name__ == '__main__':
     tree = BinarySearchTree(0)
-    for i in range(10):
+    for i in range(1, 10):
         tree.addChildBST(i)
-    print(validateBST(tree))
+    print(validateBST(tree.root))
