@@ -3,7 +3,9 @@ class Events {
         window.addEventListener(name, callback);
     }
 
-    trigger(name) {}
+    trigger(name) {
+        window.trigger(name);
+    }
 
     off(name) {
         window.removeEventListener(name);
