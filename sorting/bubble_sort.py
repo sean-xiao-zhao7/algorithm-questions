@@ -1,13 +1,12 @@
 from random import randint
 
-input = [randint(0, 50) for num in range(50)]
+input = [randint(0, 50) for num in range(10)]
 
-print(input)
+print('Original:', input, '\n')
 
 for i in range(len(input)):
-    for index, num in enumerate(input):
-        if index < len(input) - 1:
-            input[index], input[index + 1] = input[index + 1], input[index]
-    print(input)
+    for j in range(len(input) - i):
+        if input[i] < input[j]:
+            input[i], input[j] = input[j], input[i]
 
-print(input)
+print('Sorted:', input)
