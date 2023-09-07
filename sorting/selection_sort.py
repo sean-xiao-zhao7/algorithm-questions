@@ -1,6 +1,6 @@
 from random import randint
 
-input = [randint(0, 50) for num in range(100)]
+input = [randint(0, 100) for num in range(100)]
 
 print('Original:', input, '\n')
 
