@@ -24,24 +24,29 @@ def _merge(list1, list2):
     """
     Merge the sorted sublists from merge sort.
     """
+    # print(f'Merging {list1} and {list2}')
     result = []
+    index1 = 0
+    index2 = 0
     size1 = len(list1)
     size2 = len(list2)
-    for index in range(size1 + size2):
-        if index < size1 and index < size2:
-            if list1[index] < list2[index]:
-                result.append(list1[index])
+    while index1 < size1:
+        if index2 < size2:
+            if list1[index1] < list2[index2]:
+                result.append(list1[index1])
+                index1 += 1
             else:
-                result.append(list2[index])
-        elif index < size1:
-            result.append(list1[index])
-        elif index < size2:
-            result.append(list2[index])
+                result.append(list2[index2])
+                index2 += 1
         else:
-            break
+            result.append(list1[index1])
+            index1 += 1
 
+    if index2 < size2:
+        result.extend(list2[index2:])
+    # print(f'Into {result}')
     return result
 
 
-merge_sort(input)
-print('Sorted:', input)
+result = merge_sort(input)
+print('Sorted:', result)
