@@ -3,6 +3,8 @@ import random
 import timeit
 
 characters = string.ascii_letters
+word_list = ["apple", "banana", "chocolate", "dog", "elephant", "flower", "grape", "happy", "island", "juice", "kite", "lemon", "mango",
+             "nest", "orange", "penguin", "queen", "rainbow", "sunshine", "tiger", "umbrella", "volcano", "watermelon", "xylophone", "zebra"]
 
 
 def make_random_string(min_len, max_len):
@@ -38,8 +40,10 @@ def common_items(list1, list2):
     return False
 
 
-list1 = [make_random_string(10, 20) for index in range(20)]
-list2 = [make_random_string(10, 20) for index in range(20)]
+list1 = [random.choice(word_list) for index in range(5)]
+list2 = [random.choice(word_list) for index in range(5)]
+print(list1)
+print(list2)
 execution_time = timeit.timeit("print(common_items(list1, list2))",
                                globals=globals(), number=1)
 print(f'Ran for {execution_time:.6f} secs.')
