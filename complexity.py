@@ -1,10 +1,10 @@
-def test():
+def test(length):
     """
     Demonstrate space complexity.
     """
-    for index in range(100):
+    for index in range(length):
         print(index)
 
 
 if __name__ == '__main__':
-    test()
+    test(100)
