@@ -1,5 +1,6 @@
 import string
 import random
+import timeit
 
 characters = string.ascii_letters
 
@@ -39,4 +40,6 @@ def common_items(list1, list2):
 
 list1 = [make_random_string(10, 20) for index in range(20)]
 list2 = [make_random_string(10, 20) for index in range(20)]
-common_items(list1, list2)
+execution_time = timeit.timeit("print(common_items(list1, list2))",
+                               globals=globals(), number=1)
+print(f'Ran for {execution_time:.6f} secs.')
