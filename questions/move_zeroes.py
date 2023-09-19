@@ -1,10 +1,19 @@
+from utils.random import make_random_int_list
 
-def move_zeroes():
-    """
 
+def move_zeroes_mine(input_list):
     """
-    pass
+    Given an integer array nums, move all 0's to the end of it - in place -
+    while maintaining the relative order of the non-zero elements.
+    """
+    for index, item in enumerate(input_list):
+        if item == 0:
+            input_list.append(item)
+            input_list.pop(index)
 
 
 if __name__ == '__main__':
-    move_zeroes()
+    test = make_random_int_list(1000, 20, True)
+    # print(test)
+    move_zeroes_mine(test)
+    # print('\n', test)
