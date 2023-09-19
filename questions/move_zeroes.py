@@ -1,4 +1,5 @@
 from utils.random import make_random_int_list
+from timeit import timeit
 
 
 def move_zeroes_mine(input_list):
@@ -24,12 +25,15 @@ def move_zeroes_append(input_list):
         else:
             input_list[index] = item
             index += 1
-    return input_list + [0] * (len(input_list) - index)
+    for index2 in range(index, len(input_list)):
+        input_list[index2] = 0
+    return input_list
 
 
 if __name__ == '__main__':
-    test = make_random_int_list(20, 20, True, 0)
-    print(test)
-    move_zeroes_append(test)
-    # move_zeroes_mine(test)
-    print('\n', test)
+    test = make_random_int_list(10000, 20, True, 0)
+    # print(test)
+    time1 = timeit("move_zeroes_mine(test)", globals=globals(), number=1)
+    time2 = timeit("move_zeroes_append(test)", globals=globals(), number=1)
+    print(f'Time 1: {time1:.6f} secs.\nTime 2: {time2:.6f} secs.')
+    # print('\n', test)
