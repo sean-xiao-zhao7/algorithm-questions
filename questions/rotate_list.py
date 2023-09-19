@@ -1,4 +1,5 @@
 from utils.random import make_random_int_list
+from timeit import timeit
 
 
 def rotate_list_mine(nums, k):
@@ -17,7 +18,9 @@ def rotate_list_mine(nums, k):
 
 
 if __name__ == '__main__':
-    nums = make_random_int_list(10, 20)
-    print(nums)
-    result = rotate_list_mine(nums, 3)
-    print(result)
+    nums = make_random_int_list(10000, 20)
+    # print(nums)
+    time_mine = timeit("rotate_list_mine(nums, 3)",
+                       globals=globals(), number=1)
+    # print(result)
+    print(f'My time: {time_mine:.6f} secs.')
