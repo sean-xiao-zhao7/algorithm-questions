@@ -28,7 +28,7 @@ def move_zeroes_append(input_list):
 
 
 if __name__ == '__main__':
-    test = make_random_int_list(1000, 20, True)
+    test = make_random_int_list(20, 20, True, 0)
     print(test)
     move_zeroes_append(test)
     # move_zeroes_mine(test)
