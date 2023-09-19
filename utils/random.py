@@ -19,7 +19,7 @@ def make_random_string(min_len, max_len):
     return current_string
 
 
-def make_random_int_list(length, max_range):
+def make_random_int_list(length, max_range, allow_negative=False):
     """
     Generate a string of random integers between min_len and max_len length.
     Params:
@@ -28,5 +28,6 @@ def make_random_int_list(length, max_range):
     """
     current_list = []
     for index in range(length):
-        current_list.append(random.randint(0, max_range))
+        current_list.append(
+            random.randint(-max_range if allow_negative else 0, max_range))
     return current_list
