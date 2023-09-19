@@ -38,7 +38,9 @@ def find_largest_subarray_kadane(input_list):
 if __name__ == '__main__':
     test = make_random_int_list(1000, 20, True)
     # print(test)
-    print(find_largest_subarray_kadane([5, 4, -1, 7, 8]))
-    # time = timeit(
-    #     "find_largest_subarray_brute(test)", globals=globals(), number=1)
-    # print(f'Used {time:.6f} seconds.')
+    time1 = timeit("find_largest_subarray_kadane(test)",
+                   globals=globals(), number=1)
+    print(f'Kadane ran {time1:.6f} seconds.')
+    time2 = timeit(
+        "find_largest_subarray_brute(test)", globals=globals(), number=1)
+    print(f'Brute ran {time2:.6f} seconds.')
