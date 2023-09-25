@@ -7,7 +7,11 @@ def insertion_sort(list):
     Params:
     list (List[int]): list of integers in random order.    
     """
-    pass
+    list_len = len(list)
+    for index in range(list_len):
+        for index2 in range(index):
+            if list[index] <= list[index2]:
+                list[index] = list[index2]
 
 
 if __name__ == '__main__':
