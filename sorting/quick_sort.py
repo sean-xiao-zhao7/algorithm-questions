@@ -14,7 +14,7 @@ def quick_sort(list):
     current_index = 0
     lessers = []
     greaters = []
-    equals = []
+    equals = [pivot]
     while current_index < pivot_index:
         current_item = list[current_index]
         if current_item > pivot:
