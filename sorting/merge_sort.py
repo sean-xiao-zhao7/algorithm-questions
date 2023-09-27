@@ -48,5 +48,6 @@ def _merge(list1, list2):
     return result
 
 
-result = merge_sort(input)
-print('Sorted:', result)
+if __name__ == "__main__":
+    result = merge_sort(input)
+    print('Sorted:', result)
