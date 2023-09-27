@@ -1,9 +1,5 @@
 from random import randint
 
-input = [randint(0, 100) for num in range(100)]
-
-print('Original:', input, '\n')
-
 
 def merge_sort(input):
     """
@@ -49,5 +45,7 @@ def _merge(list1, list2):
 
 
 if __name__ == "__main__":
+    input = [randint(0, 100) for num in range(100)]
+    print('Original:', input, '\n')
     result = merge_sort(input)
     print('Sorted:', result)
