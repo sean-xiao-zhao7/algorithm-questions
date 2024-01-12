@@ -1,6 +1,8 @@
 import bubbleSort from "./bubble_sort.js";
+import insertionSort from "./insertion_sort.js";
 
-const nums = [11212, 2324, 12, 123, 5343, 123];
+let nums = [11212, 2324, 12, 123, 5343, 123];
 console.log(nums);
-bubbleSort(nums);
+// bubbleSort(nums);
+nums = insertionSort(nums);
 console.log(nums);
