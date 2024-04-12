@@ -1,0 +1,15 @@
+Hello, I have graduated from the University of Toronto, and have been working in the software engineering industry for the past 10 years.
+Now, I mainly focus on application development in JavaScript and Python. I've been part of large companies, as well as developing a startup company with small teams.
+I've used ChatGPT extensively recently for various prompts, including specific programming language prompts and integrating AI's output within real applications.
+I've taken prompt engineering courses for ChatGPT and Midjourney specifically.
+
+First, it reads the input text file completely, and constructs a dictionary that has key as integer and value as string, each entry corresponds to a single line in the file. The purpose is to index all encoded words and their corresponding integer code.
+Second, use the dictionary from the first step to output a string that only contains the values corresponding to the pyramid's rightmost number. This number can be calculated with the arithmetic series formula.
+
+First of all, in B the English explanation of the process is more succinct and clear.
+Second, B's solution is correct, where the step and subsets variables are updated correctly per iteration of the loop, resulting in correct progression.
+A's solution is incorrect, in that the step variable's initialization is within the while loop, and is unable to correctly slice the input in each iteration.
+
+Function A is the most efficient because it has O(sqrt(n)) time cost and no space cost, whereas B has O(n) space cost and O(n) time cost, similarly C has O(n) time cost.
+
+Solution B is accurate because it works for all lengths of the input, whereas the other solutions only work for length of 3.
