@@ -49,8 +49,8 @@ def merge_sort(list):
     Merge 2 sorted lists into 1.
     """
     middle = len(list) // 2
-    first_half = list[0:middle]
-    second_half = list[middle:-1]
+    first_half = list[:middle]
+    second_half = list[middle:]
     result = _merge(first_half, second_half)
     return result
 
@@ -62,14 +62,23 @@ def _merge(list1, list2):
     result = []
     index1 = 0
     index2 = 0
-    while index1 < len(list1):
-        while index2 < len(list2):
+    # loop through both lists, never exceeding length of the longer list
+    while index1 < len(list1) or index2 < len(list2):
+        # if we already finished checking one list, simply append the rest of the other list into result
+        if index1 >= len(list1):
+            result.append(list2[index2])
+            index2 += 1
+        elif index2 >= len(list2):
+            result.append(list1[index1])
+            index1 += 1
+        else:
+            # if both lists have items remaining, compare both current items, add lower one into result
             if list1[index1] <= list2[index2]:
                 result.append(list1[index1])
+                index1 += 1
             else:
                 result.append(list2[index2])
-            index2 += 1
-        index1 += 1
+                index2 += 1
     return result
 
 
