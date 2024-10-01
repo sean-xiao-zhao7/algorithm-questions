@@ -48,10 +48,13 @@ def merge_sort(list):
     """
     Merge 2 sorted lists into 1.
     """
+    if len(list) == 1:
+        return list
+
     middle = len(list) // 2
     first_half = list[:middle]
     second_half = list[middle:]
-    result = _merge(first_half, second_half)
+    result = _merge(merge_sort(first_half), merge_sort(second_half))
     return result
 
 
@@ -83,7 +86,7 @@ def _merge(list1, list2):
 
 
 if __name__ == "__main__":
-    input = [randint(0, 10) for num in range(10)]
+    input = [randint(0, 100) for num in range(100)]
     print('Original:', input, '\n')
     result = merge_sort(input)
     print('Sorted:', result)
