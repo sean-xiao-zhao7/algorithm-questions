@@ -13,7 +13,7 @@ def merge_sortOLD(input):
     elif size == 2:
         return [input[0], input[1]] if input[0] < input[1] else [input[1], input[0]]
     else:
-        return _merge(merge_sort(input[:size // 2]), merge_sort(input[size // 2:]))
+        return _mergeOLD(merge_sortOLD(input[:size // 2]), merge_sortOLD(input[size // 2:]))
 
 
 def _mergeOLD(list1, list2):

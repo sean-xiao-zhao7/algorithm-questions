@@ -9,7 +9,7 @@ def fib_mem(n):
     """
     Generate the nth fibonacci num.
 
-    Paramter:
+    Parameter:
     n (int): the nth fibonacci num desired.
     """
     if n == 0:

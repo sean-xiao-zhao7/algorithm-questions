@@ -1,14 +1,12 @@
-const insertionSort = (nums) => {
+const insertionSort = (input) => {
     const sorted = [];
-    for (const currentNum of nums) {
-        if (sorted.length == 0) {
-            sorted.push(currentNum);
-            continue;
-        }
+    for (const [currentInputIndex, currentInputValue] of Object.entries(
+        input
+    )) {
         for (const [currentSortedIndex, currentSortedValue] of Object.entries(
             sorted
         )) {
-            if (currentSortedValue > currentNum) {
+            if (currentSortedValue > currentInputValue) {
                 sorted.splice(currentSortedIndex, 0, currentNum);
                 break;
             }
