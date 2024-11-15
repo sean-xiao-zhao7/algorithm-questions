@@ -1,13 +1,11 @@
 const insertionSort = (input) => {
     const sorted = [];
-    for (const [currentInputIndex, currentInputValue] of Object.entries(
-        input
-    )) {
+    for (const currentInputValue of input) {
         let inserted = false;
         for (const [currentSortedIndex, currentSortedValue] of Object.entries(
             sorted
         )) {
-            if (currentSortedValue > currentInputValue) {
+            if (currentSortedValue >= currentInputValue) {
                 sorted.splice(currentSortedIndex, 0, currentInputValue);
                 inserted = true;
                 break;
@@ -15,8 +13,9 @@ const insertionSort = (input) => {
         }
         if (!inserted) {
             sorted.push(currentInputValue);
+        } else {
+            inserted = false;
         }
-        inserted = false;
     }
     return sorted;
 };
