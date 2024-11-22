@@ -4,12 +4,25 @@
  */
 const letterCombinations = function (digits) {
     const result = [];
-    for (let digit of digits) {
+    let currentDigitIndex = 0;
+    while (currentDigitIndex < digits.length) {
+        let currentDigit = digits.charAt(currentDigitIndex);
+        if (currentDigit === "") {
+            return result;
+        }
+
+        for (let letter of lettersHash[currentDigit]) {
+            let currentWord = letter;
+            while (digits.length > 0) {
+                let currentWord = "";
+            }
+        }
     }
+
     return result;
 };
 
-const numbers = {
+const lettersHash = {
     2: "abc",
     3: "def",
     4: "ghi",
