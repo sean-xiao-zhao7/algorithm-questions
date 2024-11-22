@@ -5,16 +5,24 @@
 const letterCombinations = function (digits) {
     const result = [];
     let currentDigitIndex = 0;
-    while (currentDigitIndex < digits.length) {
-        let currentDigit = digits.charAt(currentDigitIndex);
-        if (currentDigit === "") {
-            return result;
-        }
+    let currentDigit = digits.charAt(currentDigitIndex);
+    if (currentDigit == "") return result;
 
-        for (let letter of lettersHash[currentDigit]) {
-            let currentWord = letter;
-            while (digits.length > 0) {
-                let currentWord = "";
+    for (let letter of lettersHash[currentDigit]) {
+        let currentWord = letter;
+        let digit2 = digits.charAt(currentDigitIndex + 1);
+        if (currentDigit === "") break;
+        for (let letter2 of lettersHash[currentDigit]) {
+            currentWord += letter2;
+            currentDigit = digits.charAt(currentDigitIndex + 2);
+            if (currentDigit === "") break;
+            for (let letter3 of lettersHash[currentDigit]) {
+                currentWord += letter3;
+                currentDigit = digits.charAt(currentDigitIndex + 3);
+                if (currentDigit === "") break;
+                for (let letter4 of lettersHash[currentDigit]) {
+                    currentWord += letter4;
+                }
             }
         }
     }
