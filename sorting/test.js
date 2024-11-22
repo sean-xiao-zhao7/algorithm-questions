@@ -11,7 +11,7 @@ const generateDataset = (length) => {
     return result;
 };
 
-let input = generateDataset(10);
+let input = generateDataset(30);
 // input = [11212, 2324, 12, 123, 5343, 123];
 console.log(input);
 // bubbleSort(input);
