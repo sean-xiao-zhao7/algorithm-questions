@@ -3,7 +3,7 @@
 // Example: [“a”,”a”,“b”, “b”, “a”] as input would return 8.
 // The possible palindromes are a, a, b, b, a, aa, bb, abba (you don’t need to return this part).
 
-function isPalindrome(input) {
+export function isPalindrome(input) {
     let forwardIndex = 0;
     let backIndex = input.length - 1;
     while (forwardIndex <= backIndex) {
@@ -16,7 +16,7 @@ function isPalindrome(input) {
     return true;
 }
 
-function countPalindrome(input) {
+export function countPalindrome(input) {
     let count = input.length;
     let numSeen = 0;
     for (let item of input) {
