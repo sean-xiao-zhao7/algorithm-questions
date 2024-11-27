@@ -32,6 +32,13 @@ export function countPalindrome(input) {
     return count;
 }
 
-const input = ["a", "a", "b", "b", "a", "a", "b"];
-console.log(countPalindrome(input));
-// console.log(isPalindrome("aaaa"));
+export function generateTestInput(size) {
+    const finalInput = [];
+    const chars = ["a", "b"];
+    let index = 0;
+    while (index < size) {
+        finalInput.push(chars[Math.floor(Math.random() * 2)]);
+        index += 1;
+    }
+    return finalInput;
+}
