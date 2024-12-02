@@ -17,19 +17,24 @@ export function isPalindrome(input) {
 }
 
 export function countPalindrome(input) {
-    let count = input.length;
-    let numSeen = 0;
-    for (let item of input) {
-        let seen = "";
-        for (let item of input.slice(numSeen)) {
-            seen += item;
-            if (seen.length > 1 && isPalindrome(seen)) {
-                count += 1;
+    let total = input.length; // count single letters
+
+    let currentIndex = 0;
+    while (currentIndex < input.length) {
+        const remainingTotalArray = input.slice(currentIndex);
+
+        // check every possible subarrays of remainingTotalArray
+        let currentSubArray = [];
+        for (let item of remainingTotalArray) {
+            currentSubArray.push(item);
+            if (currentSubArray.length > 1 && isPalindrome(currentSubArray)) {
+                total += 1;
             }
         }
-        numSeen += 1;
+        currentIndex += 1;
     }
-    return count;
+
+    return total;
 }
 
 export function generateTestInput(size) {
