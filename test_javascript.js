@@ -1,12 +1,5 @@
-// import letterCombinationsOfAPhoneNumber from "./backtracking/letter-combinations-of-a-phone-number.js";
+import { isomorphicStringChecker } from "./algorithms/isomorphic_strings";
 
-import {
-    countPalindromeN2,
-    countPalindromeN3,
-    generateTestInput,
-} from "./actual_questions/palindrome.js";
+const result = isomorphicStringChecker();
 
-// const input = ["a", "a", "b", "b", "a", "a", "b"];
-const input = generateTestInput(10000);
-console.log(countPalindromeN3(input));
-// console.log(isPalindrome("aaaa"));
+console.log(result);
