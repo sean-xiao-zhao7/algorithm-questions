@@ -7,16 +7,27 @@ export const isomorphicStringChecker = (s1, s2) => {
 
     if (len1 != len2) return false;
 
-    const seen = {};
+    const seen1 = {};
+    const seen2 = {};
 
     let index = 0;
     while (index < len1) {
         const item1 = s1[index];
         const item2 = s2[index];
-        if (item1 in seen && seen[item1] !== item2) {
+        if (item1 in seen1 && seen1[item1] !== item2) {
             return false;
-        } else if (!(item1 in seen)) {
-            seen[item1] = item2;
+        }
+
+        if (item2 in seen2 && seen2[item2] !== item1) {
+            return false;
+        }
+
+        if (!(item1 in seen1)) {
+            seen1[item1] = item2;
+        }
+
+        if (!(item2 in seen2)) {
+            seen2[item2] = item1;
         }
         index++;
     }

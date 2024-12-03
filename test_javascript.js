@@ -1,5 +1,5 @@
-import { isomorphicStringChecker } from "./algorithms/isomorphic_strings";
+import { isomorphicStringChecker } from "./algorithms/isomorphic_strings.js";
 
-const result = isomorphicStringChecker();
+const result = isomorphicStringChecker("aaaccdd", "bbbddec");
 
 console.log(result);
