@@ -1,5 +1,6 @@
-import { isomorphicStringChecker } from "./algorithms/isomorphic_strings.js";
+import { substringsCount } from "./algorithms/strings/substringsCount";
 
-const result = isomorphicStringChecker("aaaccdd", "bbbddec");
-
+const result = substringsCount(
+    "assubstringsCountsubstringsCountsubstringsCount"
+);
 console.log(result);
