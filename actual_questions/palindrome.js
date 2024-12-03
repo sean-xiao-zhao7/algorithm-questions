@@ -3,7 +3,55 @@
 // Example: [“a”,”a”,“b”, “b”, “a”] as input would return 8.
 // The possible palindromes are a, a, b, b, a, aa, bb, abba (you don’t need to return this part).
 
-export function isPalindrome(input) {
+export function isPalindromeLogN2(currentIndex, index2, input, cache) {
+    if (currentIndex === index2) {
+        return true;
+    }
+
+    if (index2 == currentIndex + 1 && input[currentIndex] === input[index2]) {
+        return true;
+    }
+
+    if (cache[currentIndex[index2]] != -1) {
+        return cache[currentIndex[index2]];
+    }
+
+    if (
+        input[currentIndex] === input[index2] &&
+        isPalindromeLogN2(currentIndex + 1, index2 - 1, input, cache)
+    ) {
+        cache[currentIndex[index2]] = true;
+    } else {
+        cache[currentIndex[index2]] = false;
+    }
+
+    return cache[currentIndex[index2]];
+}
+
+export function countPalindromeN2(input) {
+    const length = input.length;
+    let total = 0;
+
+    const cache = Array.from({ length: total }, () =>
+        new Array(total).fill(-1)
+    );
+
+    let currentIndex = 0;
+    while (currentIndex < length) {
+        let index2 = currentIndex + 1;
+        while (index2 < length) {
+            if (isPalindromeLogN2(currentIndex, index2, input, cache)) {
+                total += 1;
+            }
+            index2 += 1;
+        }
+        currentIndex += 1;
+    }
+
+    return total;
+}
+
+export function isPalindromeN3(input) {
     let forwardIndex = 0;
     let backIndex = input.length - 1;
     while (forwardIndex <= backIndex) {
@@ -16,19 +64,21 @@ export function isPalindrome(input) {
     return true;
 }
 
-export function countPalindrome(input) {
+export function countPalindromeN3(input) {
     let total = input.length; // count single letters
-
     let currentIndex = 0;
     while (currentIndex < input.length) {
         const remainingTotalArray = input.slice(currentIndex);
 
         // check every possible subarrays of remainingTotalArray
-        let currentSubArray = [];
+        // currentSubArray is reset at every iteration of outer loop
+        let subArrayToCheck = [];
         for (let item of remainingTotalArray) {
-            currentSubArray.push(item);
-            if (currentSubArray.length > 1 && isPalindrome(currentSubArray)) {
-                total += 1;
+            subArrayToCheck.push(item);
+            if (subArrayToCheck.length > 1) {
+                if (isPalindromeN3(subArrayToCheck)) {
+                    total += 1;
+                }
             }
         }
         currentIndex += 1;
