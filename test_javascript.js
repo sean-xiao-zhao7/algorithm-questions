@@ -1,6 +1,6 @@
-import { substringsCount } from "./algorithms/strings/substringsCount";
+import { palindromesCount } from "./algorithms/strings/palindromesCount.js";
 
-const result = substringsCount(
+const result = palindromesCount(
     "assubstringsCountsubstringsCountsubstringsCount"
 );
 console.log(result);
