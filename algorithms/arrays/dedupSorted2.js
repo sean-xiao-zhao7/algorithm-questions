@@ -30,6 +30,17 @@ export function dedupSorted2(inputArray) {
     }
 }
 
+export function dedupSorted2Solution(inputArray) {
+    let count = 0;
+    for (const index in inputArray) {
+        if (count < 2 || inputArray[index] > inputArray[index - 2]) {
+            inputArray[count] = inputArray[index];
+            count++;
+        }
+    }
+    return count;
+}
+
 export function generateInput(length, max) {
     return Array.from(new Array(length), (_) =>
         Math.floor(Math.random() * max)
