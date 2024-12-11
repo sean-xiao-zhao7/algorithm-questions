@@ -11,16 +11,21 @@
 export function dedupSorted2(inputArray) {
     let count = 0;
     let prev = null;
-    for (const index in inputArray) {
+    let index = 0;
+    let length = inputArray.length;
+    while (index < length) {
         if (inputArray[index] === prev) {
             if (count < 2) {
                 count++;
+                index++;
             } else {
                 inputArray.splice(index, 1);
+                length--;
             }
         } else if (inputArray[index] !== prev) {
             prev = inputArray[index];
             count = 1;
+            index++;
         }
     }
 }
