@@ -11,16 +11,31 @@ export const findMedianSortedArrays = (nums1, nums2) => {
     let index1,
         index2 = 0;
 
+    let median1,
+        median2 = 0;
+
     for (let iteration; iteration < (len1 + len2) / 2; iteration++) {
+        median2 = median1;
+
+        if (index1 == len1) {
+            index2++;
+        } else if (index2 == len2) {
+            index1++;
+        }
+
         const item1 = nums1[index1];
         const item2 = nums2[index2];
 
         if (item1 < item2) {
+            median1 = item1;
             index1++;
         } else {
+            median1 = item2;
             index2++;
         }
     }
+
+    console.log(median1, median2);
 };
 
 export function generateTestInput(size) {
