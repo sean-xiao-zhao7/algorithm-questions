@@ -25,8 +25,8 @@ export function dedupSorted2(inputArray) {
     }
 }
 
-export function generateInputs(length, max) {
-    return Array.from(new Array(length), (item) =>
+export function generateInput(length, max) {
+    return Array.from(new Array(length), (_) =>
         Math.floor(Math.random() * max)
     ).sort();
 }
