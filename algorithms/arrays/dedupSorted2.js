@@ -8,6 +8,25 @@
  * @returns {number[]}
  */
 
-export function dedupSorted2(inputArray) {}
+export function dedupSorted2(inputArray) {
+    let count = 0;
+    let prev = null;
+    for (const index in inputArray) {
+        if (inputArray[index] === prev) {
+            if (count < 2) {
+                count++;
+            } else {
+                inputArray.splice(index, 1);
+            }
+        } else if (inputArray[index] !== prev) {
+            prev = inputArray[index];
+            count = 1;
+        }
+    }
+}
 
-export function generateInputs(length) {}
+export function generateInputs(length, max) {
+    return Array.from(new Array(length), (item) =>
+        Math.floor(Math.random() * max)
+    ).sort();
+}
