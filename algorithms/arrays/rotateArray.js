@@ -12,8 +12,8 @@ export function rotateArray(inputArray, step) {
     }
 
     return inputArray
-        .slice(step + 1, inputArray.length)
-        .concat(inputArray.slice(0, step));
+        .slice(inputArray.length - step, inputArray.length)
+        .concat(inputArray.slice(0, inputArray.length - step));
 }
 
 export function rotateArraySolution(inputArray) {}
