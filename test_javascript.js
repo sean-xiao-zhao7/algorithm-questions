@@ -1,10 +1,7 @@
-import {
-    reverseWords,
-    generateInput,
-} from "./algorithms/arrays/reverseWords.js";
+import { threeSum, generateInput } from "./algorithms/arrays/threeSum.js";
 
-const input = generateInput(10, 5);
+const input = generateInput(20, 3);
 console.log(input);
 
-const result = reverseWords(input);
+const result = threeSum(input);
 console.log(result);
