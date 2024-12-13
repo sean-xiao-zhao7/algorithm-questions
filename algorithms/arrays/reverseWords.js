@@ -9,7 +9,19 @@
  * @returns {string}
  */
 
-export function reverseWords(s) {}
+export function reverseWords(s) {
+    s = s.trim();
+    const firstSpaceIndex = s.indexOf(" ");
+    if (firstSpaceIndex === -1) {
+        return s;
+    }
+
+    return (
+        reverseWords(s.slice(firstSpaceIndex)) +
+        " " +
+        s.slice(0, firstSpaceIndex)
+    );
+}
 
 export function reverseWordsSolution(inputArray) {}
 
