@@ -1,7 +1,10 @@
-import { rotateArray, generateInput } from "./algorithms/arrays/rotateArray.js";
+import {
+    reverseWords,
+    generateInput,
+} from "./algorithms/arrays/reverseWords.js";
 
 const input = generateInput(15, 5);
 console.log(input);
 
-const result = rotateArray(input, 3);
+const result = reverseWords(input);
 console.log(result);
