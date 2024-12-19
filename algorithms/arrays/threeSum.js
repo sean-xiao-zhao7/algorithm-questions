@@ -11,13 +11,12 @@
 export function threeSum(nums) {
     const result = [];
     const seen = [];
-    const triples = {};
     for (let index = 0; index < nums.length; index++) {
         const currentItem = nums[index];
         if (currentItem in seen) {
-            seen[currentItem] = 
+            seen[currentItem] = 0;
         } else {
-            seen[currentItem] = currentItem;
+            seen[currentItem] = { c };
         }
     }
     return result;
