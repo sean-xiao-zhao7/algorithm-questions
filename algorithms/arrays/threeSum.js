@@ -20,13 +20,13 @@ export function threeSum(nums) {
         const twoSum = -nums[index];
         const seen2 = {};
         for (let index2 = index + 1; index2 < nums.length; index2++) {
-            const target = twoSum - nums[index2];
-            if (nums[index2] in seen2 || target in seen2) {
+            if (nums[index2] in seen2) {
                 continue;
             } else {
                 seen2[nums[index2]] = true;
-                seen2[target] = true;
             }
+
+            const target = twoSum - nums[index2];
             const targetIndex = nums.indexOf(target);
             if (targetIndex > -1) {
                 const threeSumSet = [
@@ -39,7 +39,18 @@ export function threeSum(nums) {
             }
         }
     }
+
     return result;
+}
+
+function IsSameThreeSums(threeSum1, threeSum2) {
+    for (let index = 0; index < threeSum1.length; index++) {
+        if (threeSum2.indexOf(threeSum1[index]) == -1) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 export function generateInput(length, max) {
