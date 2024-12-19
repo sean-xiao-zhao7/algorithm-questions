@@ -14,8 +14,9 @@ export function threeSum(nums) {
         const twoSum = -nums[index];
         for (let index2 = index + 1; index2 < nums.length; index2++) {
             const target = twoSum - nums[index2];
-            if (target in nums) {
-                result.push([nums[index], nums[index2], nums[target]]);
+            const targetIndex = nums.indexOf(target);
+            if (targetIndex > -1) {
+                result.push([nums[index], nums[index2], nums[targetIndex]]);
             }
         }
     }
