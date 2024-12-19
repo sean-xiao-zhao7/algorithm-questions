@@ -10,13 +10,13 @@
 
 export function threeSum(nums) {
     const result = [];
-    const seen = [];
     for (let index = 0; index < nums.length; index++) {
-        const currentItem = nums[index];
-        if (currentItem in seen) {
-            seen[currentItem] = 0;
-        } else {
-            seen[currentItem] = { c };
+        const twoSum = -nums[index];
+        for (let index2 = index + 1; index2 < nums.length; index2++) {
+            const target = twoSum - nums[index2];
+            if (target in nums) {
+                result.push([nums[index], nums[index2], nums[target]]);
+            }
         }
     }
     return result;
