@@ -4,11 +4,48 @@
 
 /**
  *
- * @param {number[]} nums
+ * @param {number[]} input
  * @returns {number[]}
  */
 
-export function threeSum(nums) {
+export function best3sums(input) {
+    const result = [];
+
+    // partition into postives and negatives
+    const posItems = new Set([]),
+        negItems = new Set([]);
+    for (let item in input) {
+        if (item > 0) posItems.push(item);
+        else if (item < 0) negItems.push(item);
+    }
+
+    // detect presence of zero
+    let zeroExists = false;
+    if (input.indexOf(0) != -1) {
+        zeroExists = true;
+    }
+
+    // O(n) loop
+    let overallIndex = 0,
+        posIndex = 0,
+        negsIndex = 0;
+    let currentPosItem, currentNegItem;
+    while (overallIndex < input.length) {
+        if (posIndex !== posItems.length) {
+            currentPosItem = posItems[posIndex];
+            posIndex++;
+            overallIndex++;
+        }
+        if (negsIndex !== negItems.length) {
+            currentNegItem = negItems[negsIndex];
+            negsIndex++;
+            overallIndex++;
+        }
+    }
+    return result;
+}
+
+export function myThreeSum(nums) {
     const result = [];
     const seen = {};
     for (let index = 0; index < nums.length; index++) {
