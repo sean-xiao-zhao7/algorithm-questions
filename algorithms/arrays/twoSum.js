@@ -11,7 +11,7 @@ export default function (numbers, target) {
         const item2 = numbers[index2];
 
         if (item1 > target) {
-            return [-1, -1];
+            return [undefined, undefined];
         }
 
         const sum = item1 + item2;
