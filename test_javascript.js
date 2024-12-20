@@ -11,5 +11,5 @@ export function generateInput(length, max) {
 const input = generateInput(10, 10);
 console.log(input);
 
-const result = mainFunc([2, 7, 11, 15], 9);
-console.log(result);
+const result = mainFunc(input, 3);
+// console.log(result);
