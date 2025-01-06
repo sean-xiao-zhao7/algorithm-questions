@@ -1,4 +1,4 @@
-import mainFunc from "./algorithms/arrays/twoSum.js";
+import mainFunc from "./algorithms/arrays/compressSquareMatrix.js";
 
 export function generateInput(length, max) {
     const a = Array.from(new Array(length), (_) =>
@@ -11,5 +11,5 @@ export function generateInput(length, max) {
 const input = generateInput(10, 10);
 console.log(input);
 
-const result = mainFunc(input, 3);
+// const result = mainFunc(input, 3);
 // console.log(result);
