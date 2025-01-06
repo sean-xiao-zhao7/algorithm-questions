@@ -1,4 +1,4 @@
-export function generateInput1DArray(length, max) {
+export function generateInput1DArray(length: number, max: number) {
     const a = Array.from(new Array(length), (_) =>
         Math.floor(Math.random() * max * (Math.round(Math.random()) * 2 - 1))
     );

@@ -21,3 +21,11 @@ export function generateInputSquareMatrix(rows: number, valMax: number) {
     }
     return main;
 }
+
+export function generateFactors(matrixSize: number) {
+    const factors: number[] = [];
+    for (let i = 0; i < matrixSize; i++) {
+        factors[i] = Math.floor(Math.random() * matrixSize);
+    }
+    return factors;
+}
