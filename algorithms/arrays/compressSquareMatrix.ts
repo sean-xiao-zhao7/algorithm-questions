@@ -15,9 +15,9 @@ export default function compressSquareMatrix(
         if (factors[row] <= 0) {
             continue;
         }
-
         numsSeen[row] = findXMax(matrix[row], factors[row]);
     }
+    console.log(numsSeen);
 
     return sum;
 }
@@ -40,6 +40,7 @@ function findXMax(row: number[], factor: number) {
             }
         }
     }
+    return xMaxArray;
 }
 
 export function generateInputSquareMatrix(rows: number, valMax: number) {
@@ -57,7 +58,7 @@ export function generateInputSquareMatrix(rows: number, valMax: number) {
 export function generateFactors(matrixSize: number) {
     const factors: number[] = [];
     for (let i = 0; i < matrixSize; i++) {
-        factors[i] = Math.floor(Math.random() * (matrixSize + 1));
+        factors.push(Math.floor(Math.random() * (matrixSize + 1)));
     }
     return factors;
 }
