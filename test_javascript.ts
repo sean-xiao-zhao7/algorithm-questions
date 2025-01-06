@@ -17,13 +17,15 @@ export function generateInput2DArray(
     for (let i = 0; i < rows; i++) {
         let row: number[] = [];
         for (let j = 0; j < cols; j++) {
-            row[j] = Math.floor(Math.random() * valMax);
+            row[j] = Math.floor(Math.random() * valMax) + 1;
         }
+        main[i] = row;
     }
+    return main;
 }
 
 const input = generateInput2DArray(5, 5, 10);
 console.log(input);
 
-const result = mainFunc(input, 3);
+// const result = mainFunc(input, 3);
 // console.log(result);
