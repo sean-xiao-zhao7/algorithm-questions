@@ -3,8 +3,8 @@ export default function compressSquareMatrix(
     factors: number[],
     x: number
 ) {
-    // console.log(matrix);
-    // console.log(factors);
+    console.log(matrix);
+    console.log(factors);
 
     let sum = -1;
     let numsSelected = 0;
@@ -24,19 +24,16 @@ export default function compressSquareMatrix(
 
 function findXMax(row: number[], factor: number) {
     const xMaxArray: number[] = [];
-    let min = row[0],
-        minIndex = 0;
+    xMaxArray.push(row[0]);
     for (const item in row) {
-        if (row[item] > min) {
-            if (xMaxArray.length < factor) {
-                xMaxArray.push(row[item]);
-            } else {
-                xMaxArray[minIndex] = row[item];
+        if (row[item] > xMaxArray[-1]) {
+            if (xMaxArray.length === factor) {
+                xMaxArray.shift();
             }
-        } else if (row[item] < min) {
+            xMaxArray.push(row[item]);
+        } else if (row[item] < xMaxArray[0]) {
             if (xMaxArray.length < factor) {
-                minIndex = xMaxArray.push(row[item]) - 1;
-                min = row[item];
+                xMaxArray.unshift(row[item]);
             }
         }
     }
