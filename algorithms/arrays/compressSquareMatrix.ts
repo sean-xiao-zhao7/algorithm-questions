@@ -3,9 +3,12 @@ export default function compressSquareMatrix(
     factors: number[],
     x: number
 ) {
+    console.log(matrix);
+    console.log(factors);
+
     let sum = -1;
     for (const row of matrix) {
-        console.log(row);
+        // console.log(row);
     }
     return sum;
 }
@@ -25,7 +28,7 @@ export function generateInputSquareMatrix(rows: number, valMax: number) {
 export function generateFactors(matrixSize: number) {
     const factors: number[] = [];
     for (let i = 0; i < matrixSize; i++) {
-        factors[i] = Math.floor(Math.random() * matrixSize);
+        factors[i] = Math.floor(Math.random() * (matrixSize + 1));
     }
     return factors;
 }
