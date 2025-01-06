@@ -9,3 +9,15 @@ export default function compressSquareMatrix(
     }
     return sum;
 }
+
+export function generateInputSquareMatrix(rows: number, valMax: number) {
+    const main: number[][] = [];
+    for (let i = 0; i < rows; i++) {
+        let row: number[] = [];
+        for (let j = 0; j < rows; j++) {
+            row[j] = Math.floor(Math.random() * valMax) + 1;
+        }
+        main[i] = row;
+    }
+    return main;
+}

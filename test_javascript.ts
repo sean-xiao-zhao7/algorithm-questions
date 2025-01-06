@@ -1,4 +1,6 @@
-import mainFunc from "./algorithms/arrays/compressSquareMatrix.js";
+import mainFunc, {
+    generateInputSquareMatrix,
+} from "./algorithms/arrays/compressSquareMatrix.js";
 
 export function generateInput1DArray(length, max) {
     const a = Array.from(new Array(length), (_) =>
@@ -24,8 +26,8 @@ export function generateInput2DArray(
     return main;
 }
 
-const input = generateInput2DArray(5, 5, 10);
+const input = generateInputSquareMatrix(5, 10);
 console.log(input);
 
-// const result = mainFunc(input, 3);
+const result = mainFunc(input);
 // console.log(result);
