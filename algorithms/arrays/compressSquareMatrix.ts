@@ -7,15 +7,14 @@ export default function compressSquareMatrix(
     console.log(factors);
 
     let sum = -1;
-    let numsSelected = 0;
     const numsSeen = {};
 
     for (const row in matrix) {
-        // console.log(row);
         if (factors[row] <= 0) {
             continue;
         }
-        numsSeen[row] = findXMax(matrix[row], factors[row]);
+        matrix[row].sort().reverse();
+        numsSeen[row] = matrix[row].splice(0, factors[row]);
     }
     console.log(numsSeen);
 
