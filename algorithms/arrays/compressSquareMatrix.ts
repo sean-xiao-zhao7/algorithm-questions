@@ -25,15 +25,15 @@ export default function compressSquareMatrix(
 function findXMax(row: number[], factor: number) {
     const xMaxArray: number[] = [];
     xMaxArray.push(row[0]);
-    for (const item in row) {
-        if (row[item] > xMaxArray[-1]) {
+    for (const item of row) {
+        if (item > xMaxArray[-1]) {
             if (xMaxArray.length === factor) {
                 xMaxArray.shift();
             }
-            xMaxArray.push(row[item]);
-        } else if (row[item] < xMaxArray[0]) {
+            xMaxArray.push(item);
+        } else if (item < xMaxArray[0]) {
             if (xMaxArray.length < factor) {
-                xMaxArray.unshift(row[item]);
+                xMaxArray.unshift(item);
             }
         }
     }
