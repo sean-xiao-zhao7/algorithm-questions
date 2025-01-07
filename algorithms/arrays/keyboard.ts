@@ -5,7 +5,9 @@
  * @returns integer - the number of steps used to achieve the searchTerm.
  */
 export default function Keyboard(searchTerm: string) {
-    const keyboard = "abcdefghijklmnopqrstuvwxy";
+    console.log("Finding\n", searchTerm);
+
+    const keyboard = "abcdefghijklmnopqrstuvwxyz";
     const charSteps = {};
     for (let charIndex in Array.from(keyboard)) {
         const reverseSteps = 26 - parseInt(charIndex);
@@ -20,6 +22,10 @@ export default function Keyboard(searchTerm: string) {
 
 export function generateInput(length: number) {
     let result = "";
-
+    const keyboard = "abcdefghijklmnopqrstuvwxy";
+    for (let index = 0; index < length; index++) {
+        const randIndex = Math.floor(Math.random() * 26);
+        result += keyboard[randIndex];
+    }
     return result;
 }
