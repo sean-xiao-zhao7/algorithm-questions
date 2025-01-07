@@ -13,8 +13,9 @@ export default function compressSquareMatrix(
         if (factors[row] <= 0) {
             continue;
         }
-        matrix[row].sort().reverse();
-        numsSeen[row] = matrix[row].splice(0, factors[row]);
+        matrix[row].sort((a, b) => a - b);
+        matrix[row].reverse();
+        numsSeen[row] = matrix[row].slice(0, factors[row]);
     }
     console.log(numsSeen);
 
