@@ -4,10 +4,11 @@
  * @param searchTerm
  * @returns integer - the number of steps used to achieve the searchTerm.
  */
-export default function Keyboard(searchTerm: string) {
-    console.log("Finding\n", searchTerm);
+const keyboard = "abcdefghijklmnopqrstuvwxyz";
 
-    const keyboard = "abcdefghijklmnopqrstuvwxyz";
+export default function Keyboard(searchTerm: string) {
+    console.log("Typing out", searchTerm);
+
     const charSteps = {};
     for (let charIndex in Array.from(keyboard)) {
         charSteps[keyboard[charIndex]] = parseInt(charIndex);
@@ -30,9 +31,8 @@ export default function Keyboard(searchTerm: string) {
 
 export function generateInput(length: number) {
     let result = "";
-    const keyboard = "abcdefghijklmnopqrstuvwxy";
     for (let index = 0; index < length; index++) {
-        const randIndex = Math.floor(Math.random() * 26);
+        const randIndex = Math.floor(Math.random() * 25);
         result += keyboard[randIndex];
     }
     return result;
