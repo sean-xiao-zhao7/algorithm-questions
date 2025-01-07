@@ -21,12 +21,14 @@ export default function compressSquareMatrix(
 
 function sumXMax(numsSeen: { number: number[] } | {}, x: number) {
     console.log(numsSeen);
-    let sum = -1;
-    let numsLeft = x;
-    let currentRow = 0;
-    while (numsLeft > 0) {}
-
-    return sum;
+    let sums = [];
+    for (let row in numsSeen) {
+        sums = sums.concat(numsSeen[row]);
+    }
+    sums.sort((a, b) => a - b);
+    sums.reverse();
+    sums = sums.slice(0, x);
+    return sums.reduce((vals, val) => vals + val, 0);
 }
 
 function findXMax(row: number[], factor: number) {
