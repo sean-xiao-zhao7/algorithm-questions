@@ -10,20 +10,19 @@ export default function Keyboard(searchTerm: string) {
     const keyboard = "abcdefghijklmnopqrstuvwxyz";
     const charSteps = {};
     for (let charIndex in Array.from(keyboard)) {
-        const reverseSteps = 25 - parseInt(charIndex);
-        charSteps[keyboard[charIndex]] = [parseInt(charIndex), reverseSteps];
+        charSteps[keyboard[charIndex]] = parseInt(charIndex);
     }
-    console.log(charSteps);
+    // console.log(charSteps);
 
     let stepsCount = 0;
     let prevCharSteps = -1;
     for (let currentChar of searchTerm) {
         if (prevCharSteps !== -1) {
             stepsCount += Math.abs(charSteps[currentChar] - prevCharSteps);
-            prevCharSteps = charSteps[currentChar];
         } else {
             stepsCount += charSteps[currentChar];
         }
+        prevCharSteps = charSteps[currentChar];
     }
 
     return stepsCount;
