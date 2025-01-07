@@ -3,12 +3,11 @@ export default function compressSquareMatrix(
     factors: number[],
     x: number
 ) {
-    console.log(matrix);
-    console.log(factors);
+    console.log("The matrix\n", matrix);
+    console.log("The factors", factors);
+    console.log("Picking " + x);
 
-    let sum = -1;
     const numsSeen = {};
-
     for (const row in matrix) {
         if (factors[row] <= 0) {
             continue;
@@ -17,7 +16,15 @@ export default function compressSquareMatrix(
         matrix[row].reverse();
         numsSeen[row] = matrix[row].slice(0, factors[row]);
     }
+    return sumXMax(numsSeen, x);
+}
+
+function sumXMax(numsSeen: { number: number[] } | {}, x: number) {
     console.log(numsSeen);
+    let sum = -1;
+    let numsLeft = x;
+    let currentRow = 0;
+    while (numsLeft > 0) {}
 
     return sum;
 }
