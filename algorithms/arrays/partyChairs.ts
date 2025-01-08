@@ -12,7 +12,23 @@
 export default function partyChairs(
     startTimes: number[],
     endingTimes: number[]
-) {}
+) {
+    const n = startTimes.length;
+    const timesPeople = {};
+    for (let time = 0; time < 25; time++) {
+        timesPeople[time] = 0;
+    }
+
+    for (let i = 0; i < n; i++) {
+        for (let time = 0; time < 25; time++) {
+            if (time >= startTimes[i] && time <= endingTimes[i]) {
+                timesPeople[time] += 1;
+            }
+        }
+    }
+
+    console.log(timesPeople);
+}
 
 /**
  * generateInput
