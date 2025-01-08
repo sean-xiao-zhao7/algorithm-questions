@@ -13,6 +13,9 @@ export default function partyChairs(
     startTimes: number[],
     endingTimes: number[]
 ) {
+    // console.log("Start times:\n", startTimes);
+    // console.log("End times\n", endingTimes);
+
     const n = startTimes.length;
     const timesPeople: { number: number } | {} = {};
     for (let time = 0; time < 25; time++) {
@@ -27,7 +30,7 @@ export default function partyChairs(
         }
     }
 
-    console.log(timesPeople);
+    // console.log(timesPeople);
     const values: number[] = Object.values(timesPeople);
     values.sort((a, b) => b - a);
     return values[0];
