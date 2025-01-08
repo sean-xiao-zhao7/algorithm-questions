@@ -13,3 +13,12 @@ export default function partyChairs(
     startTimes: number[],
     endingTimes: number[]
 ) {}
+
+/**
+ * generateInput
+ *
+ * Generate inputs startTimes and endTimes for partyChairs.
+ * @param n number: the length of both startTimes and endTimes.
+ * @returns number[][]: an array containing both startTimes and endTimes.
+ */
+export function generateInput(n: number) {}
