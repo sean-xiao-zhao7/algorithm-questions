@@ -1,4 +1,4 @@
-import mainFunc from "./algorithms/math/fibonacci.ts";
+import mainFunc from "./algorithms/math/stairs.ts";
 
 // const inputs = generateInput(10);
 const result = mainFunc(10);
