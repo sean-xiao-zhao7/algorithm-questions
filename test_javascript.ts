@@ -1,5 +1,5 @@
-import mainFunc, { generateInput } from "./algorithms/arrays/partyChairs.js";
+import mainFunc from "./algorithms/math/fibonacci.ts";
 
-const inputs = generateInput(10);
-const result = mainFunc(inputs[0], inputs[1]);
+// const inputs = generateInput(10);
+const result = mainFunc(10);
 console.log(result);
