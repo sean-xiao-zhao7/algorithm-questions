@@ -1,4 +1,4 @@
 import mainFunc from "./algorithms/math/frogJumpKSteps.ts";
 
-const result = mainFunc(4, 3);
+const result = mainFunc();
 console.log(result);
