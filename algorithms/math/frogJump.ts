@@ -24,7 +24,7 @@ export default function frogJump(n: number) {
 }
 
 export const recursiveVersion = function (n: number) {
-    return helper(n, generateInput(n));
+    return helper(n, [0, 40, 1, 22, 28, 34, 32, 6, 14, 40, 18], []);
 };
 
 function generateInput(n: number) {
@@ -36,7 +36,7 @@ function generateInput(n: number) {
     return heights;
 }
 
-const helper = function (n: number, heights: number[]) {
+const helper = function (n: number, heights: number[], dp: number[]) {
     if (n == 0) {
         return 0;
     }
@@ -44,10 +44,16 @@ const helper = function (n: number, heights: number[]) {
         return heights[0];
     }
 
-    const cost1 =
-        Math.abs(heights[n - 1] - heights[n]) + helper(n - 1, heights);
-    const cost2 =
-        Math.abs(heights[n - 2] - heights[n]) + helper(n - 2, heights);
+    if (dp.indexOf(n) !== -1) {
+        return dp[n];
+    }
 
-    return Math.min(cost1, cost2);
+    const cost1 =
+        Math.abs(heights[n - 1] - heights[n]) + helper(n - 1, heights, dp);
+    const cost2 =
+        Math.abs(heights[n - 2] - heights[n]) + helper(n - 2, heights, dp);
+
+    dp[n] = Math.min(cost1, cost2);
+
+    return dp[n];
 };
