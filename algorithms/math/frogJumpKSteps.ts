@@ -12,23 +12,23 @@
  */
 
 export function frogJumpTab(n: number, heights: number[]) {
-    let prev1 = 0,
-        prev2 = heights[0];
+    let dp = Array.of(n + 1);
+    dp[0] = 0;
+    dp[1] = heights[0];
 
     for (let i = 2; i < n + 1; i++) {
-        const cost1 = Math.abs(heights[i - 1] - heights[i]) + prev2;
-        const cost2 = Math.abs(heights[i - 2] - heights[i]) + prev1;
+        const cost1 = Math.abs(heights[i - 1] - heights[i]) + dp[i - 1];
+        const cost2 = Math.abs(heights[i - 2] - heights[i]) + dp[i - 2];
 
-        const min = Math.min(cost1, cost2);
-        prev1 = prev2;
-        prev2 = min;
+        dp[i] = Math.min(cost1, cost2);
     }
-    return prev2;
+    console.log(dp);
+    return dp[n - 1];
 }
 
-export default function mainFunc(n: number) {
-    // return helper(n, [0, 10, 20, 30, 10], []);
-    return frogJumpTab(n, [0, 10, 20, 30, 10]);
+export default function mainFunc(n: number, k: number) {
+    return helper(n, [0, 10, 20, 30, 10], [], k);
+    // return frogJumpTab(n, [0, 10, 20, 30, 10]);
 }
 
 function generateInput(n: number) {
@@ -40,7 +40,12 @@ function generateInput(n: number) {
     return heights;
 }
 
-const helper = function (n: number, heights: number[], dp: number[]) {
+const helper = function (
+    n: number,
+    heights: number[],
+    dp: number[],
+    k: number
+) {
     if (n == 0) {
         return 0;
     }
