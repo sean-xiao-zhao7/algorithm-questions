@@ -11,21 +11,22 @@
  * @returns {number} steps
  */
 
-export default function frogJump(n: number) {
-    let prev = 1,
-        prev2 = 1;
-    for (let i = 2; i < n + 1; i++) {
-        const current = prev + prev2;
-        prev2 = prev;
-        prev = current;
+export function frogJumpTab(n: number, heights) {
+    let cost = 0;
+
+    for (let i = 2; i < n; i++) {
+        const cost1 = Math.abs(heights[i - 1] - heights[i]) + cost;
+        const cost2 = Math.abs(heights[i - 2] - heights[i]) + cost;
+
+        cost += Math.min(cost1, cost2);
     }
 
-    return prev;
+    return cost;
 }
 
-export const recursiveVersion = function (n: number) {
-    return helper(n, [0, 40, 1, 22, 28, 34, 32, 6, 14, 40, 18], []);
-};
+export default function mainFunc(n: number) {
+    return frogJumpTab(n, [0, 40, 1, 22, 28, 34, 32, 6, 14, 40, 18]);
+}
 
 function generateInput(n: number) {
     const heights: number[] = [0];
