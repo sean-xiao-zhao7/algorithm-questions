@@ -2,8 +2,8 @@
  * frogJump
  *
  * There is a frog on the 1st step of N stairs.
- * HEIGHT[2] is the height of the 3rd stair.
- * If the frog jumps from ith to jth stair, the energy cost is HEIGHT[i - 1] - HEIGHT[j - 2].
+ * HEIGHTS[i] is the height of the i+1 stair.
+ * If the frog jumps from ith to jth stair, the energy cost is HEIGHTS[i - 1] - HEIGHTS[j - 2].
  * If the frog is at ith step it can jump to i+1 or i+2 th stair.
  * Find the minimum cost from 1st to Nth stair.
  *
@@ -24,17 +24,30 @@ export default function frogJump(n: number) {
 }
 
 export const recursiveVersion = function (n: number) {
-    const height = [];
-    return helper(n, height);
+    return helper(n, generateInput(n));
 };
 
-const helper = function (n: number, height, cost = 0) {
+function generateInput(n: number) {
+    const heights: number[] = [0];
+    for (let i = 0; i < n; i++) {
+        heights.push(Math.floor(Math.random() * 50));
+    }
+    console.log(heights);
+    return heights;
+}
+
+const helper = function (n: number, heights: number[]) {
     if (n == 0) {
-        return height[1];
+        return 0;
+    }
+    if (n == 1) {
+        return heights[0];
     }
 
-    const cost1 = Math.abs(height[n] - height[n]);
-    const cost2 = Math.abs(height[n] - height[n - 2]);
+    const cost1 =
+        Math.abs(heights[n - 1] - heights[n]) + helper(n - 1, heights);
+    const cost2 =
+        Math.abs(heights[n - 2] - heights[n]) + helper(n - 2, heights);
 
-    return helper(n - 1, height) + helper(n - 2, height);
+    return Math.min(cost1, cost2);
 };
