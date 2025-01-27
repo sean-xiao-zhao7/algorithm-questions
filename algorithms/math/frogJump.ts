@@ -11,10 +11,10 @@
  * @returns {number} steps
  */
 
-export function frogJumpTab(n: number, heights) {
+export function frogJumpTab(n: number, heights: number[]) {
     let dp = Array.of(n + 1);
     dp[0] = 0;
-    dp[1] = heights[1];
+    dp[1] = heights[0];
 
     for (let i = 2; i < n + 1; i++) {
         const cost1 = Math.abs(heights[i - 1] - heights[i]) + dp[i - 1];
@@ -58,6 +58,5 @@ const helper = function (n: number, heights: number[], dp: number[]) {
         Math.abs(heights[n - 2] - heights[n]) + helper(n - 2, heights, dp);
 
     dp[n] = Math.min(cost1, cost2);
-
     return dp[n];
 };
