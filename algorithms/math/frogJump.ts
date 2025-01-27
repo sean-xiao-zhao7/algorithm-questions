@@ -12,16 +12,18 @@
  */
 
 export function frogJumpTab(n: number, heights) {
-    let cost = 0;
+    let dp = Array.of(n);
+    dp[0] = 0;
+    dp[1] = heights[1];
 
     for (let i = 2; i < n; i++) {
-        const cost1 = Math.abs(heights[i - 1] - heights[i]) + cost;
-        const cost2 = Math.abs(heights[i - 2] - heights[i]) + cost;
+        const cost1 = Math.abs(heights[i - 1] - heights[i]) + dp[i - 1];
+        const cost2 = Math.abs(heights[i - 2] - heights[i]) + dp[i - 2];
 
-        cost += Math.min(cost1, cost2);
+        dp[i] += Math.min(cost1, cost2);
     }
 
-    return cost;
+    return dp[n - 1];
 }
 
 export default function mainFunc(n: number) {
