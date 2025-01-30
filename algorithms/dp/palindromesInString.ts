@@ -4,15 +4,15 @@
  * Example: [“a”,”a”,“b”,“b”,“a”] (aabba) as input would return 8.
  * The possible palindromes are a, a, b, b, a, aa, bb, abba (you don’t need to return this part).
  * */
-function countPalindromes(input: string) {}
+function countPalindromesInString(input: string) {}
 
-function countPalindromesRecursive(input: string) {
+function countPalindromesInStringRecursive(input: string) {
     const length = input.length;
     if (length == 1) {
         return 1;
     }
 
-    return 1 + countPalindromesRecursive(input.slice(0, length - 1));
+    return 1 + countPalindromesInStringRecursive(input.slice(0, length - 1));
 }
 
 function generateTestInput(size: number) {
@@ -28,5 +28,5 @@ function generateTestInput(size: number) {
 
 export default function main(input: string[]) {
     const stringInput = input.join("");
-    return countPalindromes(stringInput);
+    return countPalindromesInStringRecursive(stringInput);
 }
