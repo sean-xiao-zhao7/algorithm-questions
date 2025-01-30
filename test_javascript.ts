@@ -1,4 +1,4 @@
-import main from "./algorithms/math/maxNonAdjSubsequence.ts";
+import main from "./algorithms/dp/palindrome.ts";
 
-const result = main();
+const result = main(["a", "a", "b", "b", "a"]);
 console.log(result);
