@@ -1,4 +1,4 @@
-import mainFunc from "./algorithms/math/maxNonAdjSubsequence.ts";
+import main from "./algorithms/math/maxNonAdjSubsequence.ts";
 
-const result = mainFunc();
+const result = main();
 console.log(result);

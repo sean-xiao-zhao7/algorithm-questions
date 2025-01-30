@@ -39,7 +39,24 @@ const maxNonAdjSubsequenceRecursive = function (
     return cache[length];
 };
 
-export function maxNonAdjSubsequenceTab(input: number[]) {}
+export function maxNonAdjSubsequenceTab(input: number[]) {
+    const length = input.length;
+
+    // first two values are of length 0, and length 1.
+    let prev0 = 0,
+        prev1 = input[0];
+
+    for (let index = 1; index < length; index++) {
+        // calculate sum if the current element is chosen to be added to total sum.
+        const sumChoose = input[index] + prev0;
+        // also sum if current element is not chosen.
+        const sumNotChoose = prev1;
+        const maxSum = Math.max(sumChoose, sumNotChoose);
+        prev0 = prev1;
+        prev1 = maxSum;
+    }
+    return prev1;
+}
 
 function generateInput() {}
 
@@ -47,9 +64,8 @@ export default function main() {
     const input = [[2], [1], [1, 2, 4], [4], [2, 1, 4, 9]];
     const results: number[] = [];
     for (const array of input) {
-        const currentResult = maxNonAdjSubsequenceRecursive(array, []);
+        const currentResult = maxNonAdjSubsequenceTab(array);
         results.push(currentResult);
-        // return maxNonAdjIntsArrayListTab(n, [0, 10, 20, 30, 10], k);
     }
 
     return results;
