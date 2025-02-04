@@ -1,4 +1,4 @@
-import main from "./algorithms/dp/palindromesInString.ts";
+import main from "./algorithms/dp/ninja.ts";
 
-const result = main(["a", "a", "b", "b", "a"]);
+const result = main();
 console.log(result);
