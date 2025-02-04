@@ -6,14 +6,17 @@ const ninjaRecursive = function (
     day: number,
     points: number[][],
     lastChoiceIndex: number,
-    cache: number[]
+    cache: number[][]
 ) {
     // return from cache if found
-    if (typeof cache[day] !== "undefined") {
-        return cache[day];
+    if (
+        typeof cache[day] !== "undefined" &&
+        typeof cache[day][lastChoiceIndex] !== "undefined"
+    ) {
+        return cache[day][lastChoiceIndex];
     }
 
-    console.log(`Current ${day} day:`, points[day]);
+    console.log(`${day} day ${lastChoiceIndex} choice:`, points[day]);
 
     // last day
     if (day === 0) {
@@ -23,7 +26,8 @@ const ninjaRecursive = function (
                 max = Math.max(max, points[0][index]);
             }
         }
-        cache[0] = max;
+        if (typeof cache[0] === "undefined") cache[0] = [];
+        cache[0][lastChoiceIndex] = max;
         return max;
     }
 
@@ -37,7 +41,8 @@ const ninjaRecursive = function (
             max = Math.max(max, currentDayPoints);
         }
     }
-    cache[day] = max;
+    if (typeof cache[day] === "undefined") cache[day] = [];
+    cache[day][lastChoiceIndex] = max;
     return max;
 };
 
