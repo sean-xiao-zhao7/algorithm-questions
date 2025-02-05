@@ -8,6 +8,8 @@ const ninjaRecursive = function (
     lastChoiceIndex: number,
     cache: number[][]
 ) {
+    console.log(`${day} day ${lastChoiceIndex} choice:`, points[day]);
+
     // return from cache if found
     if (
         typeof cache[day] !== "undefined" &&
@@ -15,8 +17,6 @@ const ninjaRecursive = function (
     ) {
         return cache[day][lastChoiceIndex];
     }
-
-    console.log(`${day} day ${lastChoiceIndex} choice:`, points[day]);
 
     // last day
     if (day === 0) {
@@ -46,23 +46,27 @@ const ninjaRecursive = function (
     return max;
 };
 
-export function ninjaTab(input: number[]) {
-    const length = input.length;
+export function ninjaTab(points: number[][]) {
+    const length = points.length;
+    const dp = [0];
+    let prevChosen = 3;
 
-    // first two values are of length 0, and length 1.
-    let prev0 = 0,
-        prev1 = input[0];
-
-    for (let index = 1; index < length; index++) {
-        // calculate sum if the current element is chosen to be added to total sum.
-        const sumChoose = input[index] + prev0;
-        // also sum if current element is not chosen.
-        const sumNotChoose = prev1;
-        const maxSum = Math.max(sumChoose, sumNotChoose);
-        prev0 = prev1;
-        prev1 = maxSum;
+    for (let day = 1; day < length; day++) {
+        let currentMax = 0;
+        for (let index = 0; index < 3; index++) {
+            if (index != prevChosen) {
+                const currentDayPoints = points[day][index] + dp[day - 1];
+                const prevMax = currentMax;
+                currentMax = Math.max(currentMax, currentDayPoints);
+                if (prevMax < currentMax) {
+                    prevChosen = index;
+                }
+            }
+        }
+        dp[day] = currentMax;
     }
-    return prev1;
+    console.log(dp);
+    return dp[length - 1];
 }
 
 function generateInput() {}
@@ -77,8 +81,8 @@ export default function main() {
     ];
     // start with last = 3, no action is done
     const cache = [];
-    const currentResult = ninjaRecursive(points.length - 1, points, 3, cache);
-    console.log(cache);
+    // const currentResult = ninjaRecursive(points.length - 1, points, 3, cache);
+    const currentResult = ninjaTab(points);
 
     return currentResult;
 }
