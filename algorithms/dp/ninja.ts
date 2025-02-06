@@ -48,38 +48,35 @@ const ninjaRecursive = function (
 
 export function ninjaTab(points: number[][]) {
     const length = points.length;
-    const dp: number[][] = [];
-    dp[0] = [];
-    dp[0].push(Math.max(points[0][1], points[0][2])); // calculate dp[0][0]
-    dp[0].push(Math.max(points[0][0], points[0][2])); // calculate dp[0][1]
-    dp[0].push(Math.max(points[0][0], points[0][1])); // calculate dp[0][2]
-    dp[0].push(Math.max(points[0][0], points[0][1], points[0][2])); // calculate dp[0][3]
+
+    let yesterday: number[] = [];
+    yesterday[0] = Math.max(points[0][1], points[0][2]);
+    yesterday[1] = Math.max(points[0][0], points[0][2]);
+    yesterday[2] = Math.max(points[0][0], points[0][1]);
+    yesterday[3] = Math.max(points[0][0], points[0][1], points[0][2]);
 
     for (let day = 1; day < length; day++) {
-        dp[day] = [];
+        const newYesterday: number[] = [];
         for (
             let yesterdayTaskIndex = 0;
             yesterdayTaskIndex < 4;
             yesterdayTaskIndex++
         ) {
-            dp[day][yesterdayTaskIndex] = 0;
-
             // calculate all possibilities based on previous day's choices and store the results
             let currentDPMax = 0;
             for (let todayTaskIndex = 0; todayTaskIndex < 3; todayTaskIndex++) {
                 if (todayTaskIndex !== yesterdayTaskIndex) {
                     const todayPoints =
-                        points[day][todayTaskIndex] +
-                        dp[day - 1][todayTaskIndex];
+                        points[day][todayTaskIndex] + yesterday[todayTaskIndex];
                     currentDPMax = Math.max(todayPoints, currentDPMax);
                 }
             }
-            dp[day][yesterdayTaskIndex] = currentDPMax;
+            newYesterday[yesterdayTaskIndex] = currentDPMax;
         }
+        yesterday = newYesterday;
     }
 
-    console.log(dp);
-    return dp[length - 1][3];
+    return yesterday[3];
 }
 
 function generateInput() {}
