@@ -5,36 +5,36 @@
 const ninjaRecursive = function (
     day: number,
     points: number[][],
-    lastChoiceIndex: number,
+    yesterdayTaskIndex: number,
     cache: number[][]
 ) {
-    console.log(`${day} day ${lastChoiceIndex} choice:`, points[day]);
+    console.log(`${day} day ${yesterdayTaskIndex} choice:`, points[day]);
 
     // return from cache if found
     if (
         typeof cache[day] !== "undefined" &&
-        typeof cache[day][lastChoiceIndex] !== "undefined"
+        typeof cache[day][yesterdayTaskIndex] !== "undefined"
     ) {
-        return cache[day][lastChoiceIndex];
+        return cache[day][yesterdayTaskIndex];
     }
 
     // last day
     if (day === 0) {
         let max = 0;
         for (let index = 0; index < 3; index++) {
-            if (index != lastChoiceIndex) {
+            if (index != yesterdayTaskIndex) {
                 max = Math.max(max, points[0][index]);
             }
         }
         if (typeof cache[0] === "undefined") cache[0] = [];
-        cache[0][lastChoiceIndex] = max;
+        cache[0][yesterdayTaskIndex] = max;
         return max;
     }
 
     // find the max of 3 days possible
     let max = 0;
     for (let index = 0; index < 3; index++) {
-        if (index != lastChoiceIndex) {
+        if (index != yesterdayTaskIndex) {
             const currentDayPoints =
                 points[day][index] +
                 ninjaRecursive(day - 1, points, index, cache);
@@ -42,31 +42,41 @@ const ninjaRecursive = function (
         }
     }
     if (typeof cache[day] === "undefined") cache[day] = [];
-    cache[day][lastChoiceIndex] = max;
+    cache[day][yesterdayTaskIndex] = max;
     return max;
 };
 
 export function ninjaTab(points: number[][]) {
-    const length = points.length;
-    const dp = [0];
-    let prevChosen = 3;
+    const dp: number[][] = [];
+    dp.push([Math.max(points[0][1], points[0][2])]);
+    dp.push([Math.max(points[0][0], points[0][2])]);
+    dp.push([Math.max(points[0][0], points[0][1])]);
+    dp.push([Math.max(points[0][0], points[0][1], points[0][2])]);
 
     for (let day = 1; day < length; day++) {
-        let currentMax = 0;
-        for (let index = 0; index < 3; index++) {
-            if (index != prevChosen) {
-                const currentDayPoints = points[day][index] + dp[day - 1];
-                const prevMax = currentMax;
-                currentMax = Math.max(currentMax, currentDayPoints);
-                if (prevMax < currentMax) {
-                    prevChosen = index;
+        dp[day] = [];
+        for (
+            let yesterdayTaskIndex = 0;
+            yesterdayTaskIndex < 3;
+            yesterdayTaskIndex++
+        ) {
+            dp[day][yesterdayTaskIndex] = 0;
+
+            // calculate the max of 3 tasks today based on previous day's choice
+            let todayMax = 0;
+            for (let todayTaskIndex = 0; todayTaskIndex < 3; todayTaskIndex++) {
+                if (todayTaskIndex !== yesterdayTaskIndex) {
+                    const todayPoints =
+                        points[day][todayTaskIndex] +
+                        points[day - 1][todayTaskIndex];
+                    todayMax = Math.max(todayPoints, todayMax);
                 }
             }
+            dp[day][yesterdayTaskIndex] = todayMax;
         }
-        dp[day] = currentMax;
     }
-    console.log(dp);
-    return dp[length - 1];
+
+    return dp[length - 1][3];
 }
 
 function generateInput() {}
