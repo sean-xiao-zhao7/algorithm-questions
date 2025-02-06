@@ -47,35 +47,38 @@ const ninjaRecursive = function (
 };
 
 export function ninjaTab(points: number[][]) {
+    const length = points.length;
     const dp: number[][] = [];
-    dp.push([Math.max(points[0][1], points[0][2])]);
-    dp.push([Math.max(points[0][0], points[0][2])]);
-    dp.push([Math.max(points[0][0], points[0][1])]);
-    dp.push([Math.max(points[0][0], points[0][1], points[0][2])]);
+    dp[0] = [];
+    dp[0].push(Math.max(points[0][1], points[0][2])); // calculate dp[0][0]
+    dp[0].push(Math.max(points[0][0], points[0][2])); // calculate dp[0][1]
+    dp[0].push(Math.max(points[0][0], points[0][1])); // calculate dp[0][2]
+    dp[0].push(Math.max(points[0][0], points[0][1], points[0][2])); // calculate dp[0][3]
 
     for (let day = 1; day < length; day++) {
         dp[day] = [];
         for (
             let yesterdayTaskIndex = 0;
-            yesterdayTaskIndex < 3;
+            yesterdayTaskIndex < 4;
             yesterdayTaskIndex++
         ) {
             dp[day][yesterdayTaskIndex] = 0;
 
-            // calculate the max of 3 tasks today based on previous day's choice
-            let todayMax = 0;
+            // calculate all possibilities based on previous day's choices and store the results
+            let currentDPMax = 0;
             for (let todayTaskIndex = 0; todayTaskIndex < 3; todayTaskIndex++) {
                 if (todayTaskIndex !== yesterdayTaskIndex) {
                     const todayPoints =
                         points[day][todayTaskIndex] +
-                        points[day - 1][todayTaskIndex];
-                    todayMax = Math.max(todayPoints, todayMax);
+                        dp[day - 1][todayTaskIndex];
+                    currentDPMax = Math.max(todayPoints, currentDPMax);
                 }
             }
-            dp[day][yesterdayTaskIndex] = todayMax;
+            dp[day][yesterdayTaskIndex] = currentDPMax;
         }
     }
 
+    console.log(dp);
     return dp[length - 1][3];
 }
 
@@ -83,11 +86,11 @@ function generateInput() {}
 
 export default function main() {
     const points = [
-        [2, 1, 3],
-        [1, 7, 9],
-        [1, 2, 4],
-        [4, 3, 4],
-        [2, 1, 4],
+        [2, 1, 3], // day1
+        [1, 7, 9], // day2
+        [1, 2, 4], // day3
+        [4, 3, 4], // day4
+        [2, 1, 4], // day5
     ];
     // start with last = 3, no action is done
     const cache = [];
