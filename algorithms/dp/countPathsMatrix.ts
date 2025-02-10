@@ -19,19 +19,16 @@ const countPathsMatrixRecursive = function (m: number, n: number) {
 
 export function countPathsMatrixTab(m: number, n: number) {
     const dp: number[][] = [];
-    for (let x = 0; x < m; x++) {
-        dp[x][0] = 1;
-    }
-    for (let y = 0; y < n; y++) {
-        dp[0][y] = 1;
-    }
     for (let x = 1; x < m; x++) {
+        dp[x] = [];
         for (let y = 1; y < n; y++) {
-            if (typeof dp[x][y] !== "undefined") {
-                const horizontalTotal = dp[x - 1][y];
-                const verticalTotal = dp[x][y - 1];
-                dp[x][y] = horizontalTotal + verticalTotal;
-            }
+            const prevX = x - 1;
+            const prevY = y - 1;
+            let horizontalTotal = 1;
+            if (prevX !== 0) horizontalTotal = dp[x - 1][y];
+            let verticalTotal = 1;
+            if (prevY !== 0) verticalTotal = dp[x][y - 1];
+            dp[x][y] = horizontalTotal + verticalTotal;
         }
     }
     return dp[m - 1][n - 1];
@@ -43,6 +40,6 @@ export default function main() {
     // [(0,0), (0,1), (0,2)
     //  (1,0), (1,1), (1,2)
     //  (2,0), (2,1), (2,2)]
-    const grandTotal = countPathsMatrixTab(4, 3);
+    const grandTotal = countPathsMatrixRecursive(4, 3);
     return grandTotal;
 }
