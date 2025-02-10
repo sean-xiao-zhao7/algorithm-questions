@@ -2,7 +2,6 @@
  * Count all possible paths from 0,0 to m-1,n-1 of a matrix of size m:n.
  * @param input integer 2D array.
  */
-
 const countPathsMatrixRecursive = function (m: number, n: number) {
     if (m == 1 && n == 1) {
         return 1;
@@ -22,15 +21,16 @@ export function countPathsMatrixTab(m: number, n: number) {
     for (let x = 1; x < m; x++) {
         dp[x] = [];
         for (let y = 1; y < n; y++) {
-            const prevX = x - 1;
-            const prevY = y - 1;
+            const prevXIndex = x - 1;
+            const prevYIndex = y - 1;
             let horizontalTotal = 1;
-            if (prevX !== 0) horizontalTotal = dp[x - 1][y];
+            if (prevXIndex !== 0) horizontalTotal = dp[x - 1][y];
             let verticalTotal = 1;
-            if (prevY !== 0) verticalTotal = dp[x][y - 1];
+            if (prevYIndex !== 0) verticalTotal = dp[x][y - 1];
             dp[x][y] = horizontalTotal + verticalTotal;
         }
     }
+    console.log(dp);
     return dp[m - 1][n - 1];
 }
 
@@ -40,6 +40,6 @@ export default function main() {
     // [(0,0), (0,1), (0,2)
     //  (1,0), (1,1), (1,2)
     //  (2,0), (2,1), (2,2)]
-    const grandTotal = countPathsMatrixRecursive(4, 3);
+    const grandTotal = countPathsMatrixTab(3, 3);
     return grandTotal;
 }
