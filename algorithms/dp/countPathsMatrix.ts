@@ -12,19 +12,28 @@ const directions = {
 const countPathsMatrixRecursive = function (
     m: number,
     n: number,
-    grandTotal: number
+    prevDirection: string
 ) {
-    if (m == 0 && n == 0) {
-        return;
-    } else if (m == 0) {
-        return;
-    } else if (n == 0) {
-        return;
+    if (m == 1 && n == 1) {
+        return prevDirection !== "diagonal" ? 1 : 0;
+    } else if (m == 1) {
+        return 0;
+    } else if (n == 1) {
+        return 0;
     } else {
-        grandTotal += 2;
-        countPathsMatrixRecursive(m, n - 1, grandTotal);
-        countPathsMatrixRecursive(m - 1, n, grandTotal);
-        countPathsMatrixRecursive(m - 1, n - 1, grandTotal);
+        let grandTotal = 2;
+        grandTotal += countPathsMatrixRecursive(
+            m,
+            n - 1,
+            directions.horizontal
+        );
+        grandTotal += countPathsMatrixRecursive(m - 1, n, directions.vertical);
+        grandTotal += countPathsMatrixRecursive(
+            m - 1,
+            n - 1,
+            directions.diagonal
+        );
+        return grandTotal;
     }
 };
 
@@ -35,9 +44,6 @@ function generateInput() {}
 export default function main() {
     // [(0,0), (0,1)
     //  (1,0), (1,1)]
-    const cache = [];
-    let grandTotal = 0;
-    const currentResult = countPathsMatrixRecursive(2, 2, grandTotal);
-
-    return currentResult;
+    const grandTotal = countPathsMatrixRecursive(4, 4, "none");
+    return grandTotal + 1;
 }

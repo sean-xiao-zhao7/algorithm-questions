@@ -1,4 +1,4 @@
-import main from "./algorithms/dp/ninja.ts";
+import main from "./algorithms/dp/countPathsMatrix.ts";
 
 const result = main();
 console.log(result);
