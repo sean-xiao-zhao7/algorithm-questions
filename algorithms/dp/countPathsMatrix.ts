@@ -32,17 +32,7 @@ export function countPathsMatrixTab(m: number, n: number) {
 }
 
 export function countPathsMatrixComb(m: number, n: number) {
-    let up: number = 1;
-    let lefts: number[] = Array(n).fill(1);
-
-    for (let x = 1; x < m; x++) {
-        up = 1;
-        for (let y = 1; y < n; y++) {
-            up = lefts[y] + up;
-            lefts[y] = up;
-        }
-    }
-    return up;
+    // choose m items from 2 choices of left/up with repetition.
 }
 
 function generateInput() {}
