@@ -30,17 +30,29 @@ export function countPathsMatrixTab(m: number, n: number) {
     }
     return up;
 }
-
+/**
+ * The number of possible ways to traverse from 0,0 to m-1,n-1
+ * is equal to number of ways to choose n-1 ups or m-1 lefts from total slots of (m-1) + (n-1)
+ * Simply calculate C(m+n-2, m-1) or C(m+n-2, n-1)
+ *
+ * @param m rows
+ * @param n columns
+ */
 export function countPathsMatrixComb(m: number, n: number) {
-    // choose m items from 2 choices of left/up with repetition.
+    const nElements = m + n - 2;
+    const selection = m - 1;
+    let combination = 1; // temp var to hold value of C(nElements, selection)
+    for (let denominator = 1; denominator <= selection; denominator++) {
+        const numerator = nElements - selection + denominator;
+        const currentFraction = numerator / denominator;
+        combination = combination * currentFraction;
+    }
+    return combination;
 }
 
 function generateInput() {}
 
 export default function main() {
-    // [(0,0), (0,1), (0,2)
-    //  (1,0), (1,1), (1,2)
-    //  (2,0), (2,1), (2,2)]
     const grandTotal = countPathsMatrixComb(3, 4);
     return grandTotal;
 }
