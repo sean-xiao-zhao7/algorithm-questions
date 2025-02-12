@@ -42,6 +42,8 @@ export function countPathsMatrixComb(m: number, n: number) {
     const nElements = m + n - 2;
     const selection = m - 1;
     let combination = 1; // temp var to hold value of C(nElements, selection)
+
+    // each iteration calculate one fraction of C(n,r) = n!/r!(n-r)!
     for (let denominator = 1; denominator <= selection; denominator++) {
         const numerator = nElements - selection + denominator;
         const currentFraction = numerator / denominator;
