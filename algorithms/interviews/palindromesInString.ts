@@ -17,7 +17,7 @@ function countPalindromesInStringRecursive(
     //[a] + [a] + [b] + [b] + [a]
     const length = input.length;
     if (length == 1) {
-        return 1;
+        return 0;
     }
 
     const totalStartingThisChar =
@@ -33,5 +33,7 @@ function countPalindromesInStringRecursive(
 
 export default function main() {
     const stringInput = "aaabba";
-    return countPalindromesInStringRecursive(stringInput, {});
+    return (
+        stringInput.length + countPalindromesInStringRecursive(stringInput, {})
+    );
 }
