@@ -36,9 +36,9 @@ function countPalindromesInStringTabulation(
 ) {
     const iterations: number[][] = [];
     iterations[0] = [];
-    iterations[0][0] = 1;
-    iterations[0][1] = 0;
-    for (let length = 1; length < input.length; length++) {
+    iterations[0][0] = 1; // totalStartingThisChar
+    iterations[0][1] = 0; // totalWithoutThisChar
+    for (let length = 1; length < input.length + 1; length++) {
         iterations[length] = [];
 
         const currentString = input.slice(0, length);
@@ -50,8 +50,11 @@ function countPalindromesInStringTabulation(
         currentResult = isPalindrome(remainingString, cache);
         const totalWithoutThisChar = currentResult + iterations[length - 1][1];
         iterations[length][1] = totalWithoutThisChar;
+
+        console.log(currentString);
+        console.log(iterations);
     }
-    return iterations[input.length - 1][0] + iterations[input.length - 1][1];
+    return iterations[input.length][0] + iterations[input.length][1];
 }
 
 function isPalindrome(input: string, cache: { string: boolean } | {}) {
