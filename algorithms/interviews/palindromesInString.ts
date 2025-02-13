@@ -10,14 +10,28 @@ function countPalindromesInStringRecursive(
     input: string,
     cache: { string: boolean } | {}
 ) {
-    //[“a”,”a”,“b”,“b”,“a”]
+    //[a a b b a]
     //[a] + [a, b, b, a]
     //[a] + [a] + [b, b, a]
     //[a] + [a] + [b] + [b, a]
     //[a] + [a] + [b] + [b] + [a]
+    const length = input.length;
+    if (length == 1) {
+        return 1;
+    }
+
+    const totalStartingThisChar =
+        1 +
+        countPalindromesInStringRecursive(input.slice(0, length - 1), cache);
+    const totalWithoutThisChar = countPalindromesInStringRecursive(
+        input.slice(1, length),
+        cache
+    );
+
+    return totalStartingThisChar + totalWithoutThisChar;
 }
 
-export default function main(input: string[]) {
-    const stringInput = input.join("");
+export default function main() {
+    const stringInput = "aaabba";
     return countPalindromesInStringRecursive(stringInput, {});
 }
