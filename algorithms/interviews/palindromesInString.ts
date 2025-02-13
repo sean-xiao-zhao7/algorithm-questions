@@ -1,6 +1,4 @@
 /*
- * TODO
- *
  * A palindrome is a sequence of numbers or letters that is the same if read both forward and backward (i.e. abcba, abccba).
  * Given an array of letters as input, write an algorithm that returns the number of contiguous subsequence palindromes.
  * Example: [“a”,”a”,“b”,“b”,“a”] (aabba) as input would return 8.
@@ -21,7 +19,7 @@ function countPalindromesInStringRecursive(
         cache[input] = true;
     }
 
-    const currentResult: number = isPalidrome(input, cache);
+    const currentResult: number = isPalindrome(input, cache);
     const totalStartingThisChar =
         currentResult +
         countPalindromesInStringRecursive(input.slice(0, length - 1), cache);
@@ -32,7 +30,31 @@ function countPalindromesInStringRecursive(
     return totalStartingThisChar + totalWithoutThisChar;
 }
 
-function isPalidrome(input: string, cache: { string: boolean } | {}) {
+function countPalindromesInStringTabulation(
+    input: string,
+    cache: { string: boolean } | {}
+) {
+    const iterations: number[][] = [];
+    iterations[0] = [];
+    iterations[0][0] = 1;
+    iterations[0][1] = 0;
+    for (let length = 1; length < input.length; length++) {
+        iterations[length] = [];
+
+        const currentString = input.slice(0, length);
+        let currentResult: number = isPalindrome(currentString, cache);
+        const totalStartingThisChar = currentResult + iterations[length - 1][0];
+        iterations[length][0] = totalStartingThisChar;
+
+        const remainingString = input.slice(1, input.length);
+        currentResult = isPalindrome(remainingString, cache);
+        const totalWithoutThisChar = currentResult + iterations[length - 1][1];
+        iterations[length][1] = totalWithoutThisChar;
+    }
+    return iterations[input.length - 1][0] + iterations[input.length - 1][1];
+}
+
+function isPalindrome(input: string, cache: { string: boolean } | {}) {
     const result = 1;
     let start = 0,
         end = input.length - 1;
@@ -47,7 +69,8 @@ function isPalidrome(input: string, cache: { string: boolean } | {}) {
 
 export default function main() {
     const stringInput = "aabba";
-    return (
-        stringInput.length + countPalindromesInStringRecursive(stringInput, {})
-    );
+    return countPalindromesInStringTabulation(stringInput, {});
+    // return (
+    //     stringInput.length + countPalindromesInStringTa(stringInput, {})
+    // );
 }
