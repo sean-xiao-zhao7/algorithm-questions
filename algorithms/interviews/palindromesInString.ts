@@ -21,7 +21,7 @@ function countPalindromesInStringRecursive(
         cache[input] = true;
     }
 
-    const currentResult: number = isPalidrome(input);
+    const currentResult: number = isPalidrome(input, cache);
     const totalStartingThisChar =
         currentResult +
         countPalindromesInStringRecursive(input.slice(0, length - 1), cache);
@@ -29,20 +29,19 @@ function countPalindromesInStringRecursive(
         input.slice(1, length),
         cache
     );
-
     return totalStartingThisChar + totalWithoutThisChar;
 }
 
-function isPalidrome(input: string) {
+function isPalidrome(input: string, cache: { string: boolean } | {}) {
     const result = 1;
     let start = 0,
         end = input.length - 1;
     while (start < end) {
         if (input[start] !== input[end]) return 0;
+        if (cache[input.slice(start, end)]) return 1;
         start++;
         end--;
     }
-    console.log(input);
     return result;
 }
 
