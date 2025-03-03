@@ -37,7 +37,7 @@ export function minPathValsMatrixTab(m: number, n: number, matrix: number[][]) {
         const currentMinsRow: number[] = Array(n);
         for (let j = 0; j < n; j++) {
             if (i === 0) {
-                currentMinsRow[0][j] = matrix[i][j] + prevMinUp;
+                currentMinsRow[0][j] = matrix[0][j] + prevMinUp;
             } else if (j === 0) {
                 currentMinsRow[i][0] = matrix[i][0] + prevMinsLeft[i - 1][0];
             } else {
@@ -47,6 +47,7 @@ export function minPathValsMatrixTab(m: number, n: number, matrix: number[][]) {
             }
         }
         prevMinsLeft = currentMinsRow;
+        prevMinUp = 0;
     }
     return prevMinUp;
 }
