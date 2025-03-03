@@ -31,31 +31,24 @@ const minPathValsMatrixRecursive = function (
 };
 
 export function minPathValsMatrixTab(m: number, n: number, matrix: number[][]) {
-    const minVals: number[][] = Array.from(matrix, (x) => {
-        return Array.from(x, (y) => {
-            return -1;
-        });
-    });
-    minVals[0][0] = matrix[0][0];
-    minVals[1][0] = matrix[0][0] + matrix[1][0];
-    minVals[0][1] = matrix[0][0] + matrix[0][1];
+    let prevMinUp = 0;
+    let prevMinsLeft: number[] = Array(n);
     for (let i = 0; i < m; i++) {
+        const currentMinsRow: number[] = Array(n);
         for (let j = 0; j < n; j++) {
-            if (minVals[i][j] === -1) {
-                if (i === 0) {
-                    minVals[i][j] = matrix[i][j] + minVals[i][j - 1];
-                } else if (j === 0) {
-                    minVals[i][j] = matrix[i][j] + minVals[i - 1][j];
-                } else {
-                    minVals[i][j] =
-                        matrix[i][j] +
-                        Math.min(minVals[i - 1][j], minVals[i][j - 1]);
-                }
+            if (i === 0) {
+                currentMinsRow[0][j] = matrix[i][j] + prevMinUp;
+            } else if (j === 0) {
+                currentMinsRow[i][0] = matrix[i][0] + prevMinsLeft[i - 1][0];
+            } else {
+                currentMinsRow[i][j] =
+                    matrix[i][j] + Math.min(prevMinsLeft[i - 1][j], prevMinUp);
+                prevMinUp = currentMinsRow[i][j];
             }
         }
+        prevMinsLeft = currentMinsRow;
     }
-    console.log(minVals);
-    return minVals[m - 1][n - 1];
+    return prevMinUp;
 }
 
 function generateInput() {}
