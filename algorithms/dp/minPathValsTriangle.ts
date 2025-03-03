@@ -18,18 +18,26 @@ const minPathValsTriangleRecursive = function (
         return currentRow[0];
     }
 
-    if (typeof currentRow[entryIndex] === undefined) {
-        return 0;
+    let currentMin: number,
+        prevRowIndexMin: number,
+        prevRowIndexMinusOneMin: number = 0;
+    if (entryIndex === currentRow.length - 1) {
+        currentMin =
+            currentRow[entryIndex] +
+            minPathValsTriangleRecursive(h - 1, triangle, entryIndex - 1);
+    } else if (entryIndex - 1 < 0) {
+        currentMin =
+            currentRow[entryIndex] +
+            minPathValsTriangleRecursive(h - 1, triangle, entryIndex);
+    } else {
+        prevRowIndexMinusOneMin =
+            currentRow[entryIndex] +
+            minPathValsTriangleRecursive(h - 1, triangle, entryIndex - 1);
+        prevRowIndexMin =
+            currentRow[entryIndex] +
+            minPathValsTriangleRecursive(h - 1, triangle, entryIndex);
+        currentMin = Math.min(prevRowIndexMin, prevRowIndexMinusOneMin);
     }
-
-    let currentMin = 0;
-    const prevRowIndexMin =
-        currentRow[entryIndex] +
-        minPathValsTriangleRecursive(h - 1, triangle, entryIndex);
-    const prevRowIndexMinusOneMin =
-        currentRow[entryIndex] +
-        minPathValsTriangleRecursive(h - 1, triangle, entryIndex - 1);
-    currentMin = Math.min(prevRowIndexMin, prevRowIndexMinusOneMin);
 
     return currentMin;
 };
@@ -41,8 +49,8 @@ function generateInput() {}
 export default function main() {
     const triangle = [[1], [2, 5], [1, 9, 6]];
     // [ [ 1 ],
-    // , [ 3, 8 ],
-    // , [ 1, 10, 16 ] ]
+    // , [ 2, 5 ],
+    // , [ 1, 9, 6 ] ]
     const lastRow = triangle[triangle.length - 1];
     let overallMin = -1;
     for (let index in lastRow) {
