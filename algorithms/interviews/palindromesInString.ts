@@ -41,12 +41,12 @@ function countPalindromesInStringTabulation(
     for (let length = 1; length < input.length + 1; length++) {
         iterations[length] = [];
 
-        const currentString = input.slice(0, length);
+        const currentString = input.slice(0, length - 1);
         let currentResult: number = isPalindrome(currentString, cache);
         const totalStartingThisChar = currentResult + iterations[length - 1][0];
         iterations[length][0] = totalStartingThisChar;
 
-        const remainingString = input.slice(1, input.length);
+        const remainingString = currentString.slice(1, currentString.length);
         currentResult = isPalindrome(remainingString, cache);
         const totalWithoutThisChar = currentResult + iterations[length - 1][1];
         iterations[length][1] = totalWithoutThisChar;
