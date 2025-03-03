@@ -1,4 +1,4 @@
-import main from "./algorithms/interviews/palindromesInString.ts";
+import main from "./algorithms/dp/minPathValsMatrix.ts";
 
 const result = main();
 console.log(result);
