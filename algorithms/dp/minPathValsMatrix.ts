@@ -31,15 +31,30 @@ const minPathValsMatrixRecursive = function (
 };
 
 export function minPathValsMatrixTab(m: number, n: number, matrix: number[][]) {
-    const minVals: number[][] = [];
+    const minVals: number[][] = Array.from(matrix, (x) => {
+        return Array.from(x, (y) => {
+            return -1;
+        });
+    });
     minVals[0][0] = matrix[0][0];
     minVals[1][0] = matrix[0][0] + matrix[1][0];
     minVals[0][1] = matrix[0][0] + matrix[0][1];
-    for (let i = 1; i < m; i++) {
-        for (let j = 1; j < n; j++) {
-            minVals[i][j] = Math.min(minVals[i - 1][j], minVals[i][j - 1]);
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (minVals[i][j] === -1) {
+                if (i === 0) {
+                    minVals[i][j] = matrix[i][j] + minVals[i][j - 1];
+                } else if (j === 0) {
+                    minVals[i][j] = matrix[i][j] + minVals[i - 1][j];
+                } else {
+                    minVals[i][j] =
+                        matrix[i][j] +
+                        Math.min(minVals[i - 1][j], minVals[i][j - 1]);
+                }
+            }
         }
     }
+    console.log(minVals);
     return minVals[m - 1][n - 1];
 }
 
@@ -57,15 +72,18 @@ export default function main() {
         [2, 5, 6],
         [1, 9, 6],
     ];
-    // const minPathVal = minPathValsMatrixRecursive(
-    //     matrix.length,
-    //     matrix[0].length,
-    //     matrix
-    // );
-    const minPathVal = minPathValsMatrixTab(
+    // [ [ 1, 4, 4 ],
+    // , [ 3, 8, 10 ],
+    // , [ 1, 10, 16 ] ]
+    const minPathVal = minPathValsMatrixRecursive(
         matrix.length,
         matrix[0].length,
         matrix
     );
+    // const minPathVal = minPathValsMatrixTab(
+    //     matrix.length,
+    //     matrix[0].length,
+    //     matrix
+    // );
     return minPathVal;
 }
