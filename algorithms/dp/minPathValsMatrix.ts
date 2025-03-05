@@ -32,9 +32,9 @@ const minPathValsMatrixRecursive = function (
 
 export function minPathValsMatrixTab(m: number, n: number, matrix: number[][]) {
     let prevMinUp = 0;
-    let prevMinsLeft: number[] = Array(n);
+    let prevMinsLeft: number[][] = Array(n);
     for (let i = 0; i < m; i++) {
-        const currentMinsRow: number[] = Array(n);
+        const currentMinsRow: number[][] = Array(n);
         for (let j = 0; j < n; j++) {
             if (i === 0) {
                 currentMinsRow[0][j] = matrix[0][j] + prevMinUp;
