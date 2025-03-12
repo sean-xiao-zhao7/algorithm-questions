@@ -14,17 +14,20 @@ function quickSort(inputArray: number[]) {
 }
 
 function qsMovePivot(inputArray: number[], pivotIndex: number) {
-    console.log(pivotIndex);
-    for (let index = 0; index < pivotIndex; index++) {
+    let index = 0;
+    while (index < pivotIndex) {
+        console.log(inputArray, index);
         if (inputArray[index] >= inputArray[pivotIndex]) {
-            inputArray.splice(pivotIndex, 0, inputArray[index]);
+            inputArray.splice(pivotIndex + 1, 0, inputArray[index]);
             inputArray.splice(index, 1);
+            pivotIndex--;
+        } else {
+            index++;
         }
     }
-    console.log(inputArray);
     return pivotIndex;
 }
 
-const input = [1231, 4123, 412, 12, 1231, 4];
+const input = [1231, 4123, 412, 12, 123124, 3444];
 const sortedInput = quickSort(input);
 console.log(sortedInput);
