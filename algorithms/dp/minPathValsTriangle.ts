@@ -27,7 +27,7 @@ function minPathValsTriangleRecursive(
         currentValue +
         minPathValsTriangleRecursive(height + 1, row + 1, triangle);
 
-    return Math.min(downTotal, diagonalDownTotal);
+    return Math.max(downTotal, diagonalDownTotal);
 }
 
 export function minPathValsTriangleTab(h: number, triangle: number[][]) {}
@@ -42,3 +42,5 @@ export default function main() {
     console.log(overallMin);
     return overallMin;
 }
+
+main();
