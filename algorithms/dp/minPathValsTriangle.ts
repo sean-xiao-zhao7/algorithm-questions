@@ -27,10 +27,33 @@ function minPathValsTriangleRecursive(
         currentValue +
         minPathValsTriangleRecursive(height + 1, row + 1, triangle);
 
-    return Math.max(downTotal, diagonalDownTotal);
+    return Math.min(downTotal, diagonalDownTotal);
 }
 
-export function minPathValsTriangleTab(h: number, triangle: number[][]) {}
+export function minPathValsTriangleTab(triangle: number[][]) {
+    let prevTabRow = triangle[0];
+    for (let height = 1; height < triangle.length; height++) {
+        let currentTabRow: number[] = [];
+        for (let row = 0; row < triangle[height].length; row++) {
+            if (row === 0) {
+                const upTotal: number = triangle[height][row] + prevTabRow[row];
+                currentTabRow[row] = upTotal;
+            } else if (row === triangle[height].length - 1) {
+                const diagonalUpTotal: number =
+                    triangle[height][row] + prevTabRow[row - 1];
+                currentTabRow[row] = diagonalUpTotal;
+            } else {
+                const upTotal: number = triangle[height][row] + prevTabRow[row];
+                const diagonalUpTotal: number =
+                    triangle[height][row] + prevTabRow[row - 1];
+                currentTabRow[row] = Math.min(upTotal, diagonalUpTotal);
+            }
+        }
+        console.log(currentTabRow);
+        prevTabRow = currentTabRow;
+    }
+    return prevTabRow;
+}
 
 export default function main() {
     const triangle = [[1], [2, 5], [1, 9, 6]];
@@ -38,9 +61,9 @@ export default function main() {
     // , [ 2, 5 ],
     // , [ 1, 9, 6 ] ]
 
-    const overallMin = minPathValsTriangleRecursive(0, 0, triangle);
-    console.log(overallMin);
-    return overallMin;
+    const recursiveResult = minPathValsTriangleRecursive(0, 0, triangle);
+    const tabulationResult = minPathValsTriangleTab(triangle);
+    console.log(recursiveResult, tabulationResult);
 }
 
 main();
