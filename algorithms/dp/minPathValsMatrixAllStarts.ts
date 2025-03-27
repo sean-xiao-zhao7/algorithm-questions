@@ -39,7 +39,33 @@ function minPathValsMatrixAllStartsRecursive(
     return min;
 }
 
-export function minPathValsMatrixAllStartsTab(triangle: number[][]) {}
+export function minPathValsMatrixAllStartsTab(matrix: number[][]) {
+    let preRow: number[] = [];
+    for (let item of matrix[0]) {
+        preRow.push(item);
+    }
+
+    let newPreRow: number[] = [];
+    for (let row = 1; row < matrix.length; row++) {
+        for (let col = 0; col < matrix[0].length; col++) {
+            let upLeft = 10000,
+                directlyUp = 10000,
+                upRight = 10000;
+            if (col > 0) {
+                upLeft = matrix[row][col] + preRow[col - 1];
+            } else if (col < matrix[0].length) {
+                upRight = matrix[row][col] + preRow[col + 1];
+            }
+            directlyUp = matrix[row][col] + preRow[col];
+            const min = Math.min(upLeft, directlyUp, upRight);
+            newPreRow.push(min);
+        }
+        preRow = newPreRow;
+        newPreRow = [];
+    }
+
+    return preRow;
+}
 
 export default function main() {
     const matrix = [
@@ -48,34 +74,34 @@ export default function main() {
         [10, 9, 6],
     ];
 
-    let cache: number[][] = [
-        [-1, -1, -1],
-        [-1, -1, -1],
-        [-1, -1, -1],
-    ];
+    // let cache: number[][] = [
+    //     [-1, -1, -1],
+    //     [-1, -1, -1],
+    //     [-1, -1, -1],
+    // ];
 
-    let overallMin = minPathValsMatrixAllStartsRecursive(
-        matrix.length - 1,
-        0,
-        matrix,
-        cache
-    );
-    for (let col = 1; col < matrix[0].length; col++) {
-        cache = [
-            [-1, -1, -1],
-            [-1, -1, -1],
-            [-1, -1, -1],
-        ];
-        const recursiveResult = minPathValsMatrixAllStartsRecursive(
-            matrix.length - 1,
-            col,
-            matrix,
-            cache
-        );
-        overallMin = Math.min(overallMin, recursiveResult);
-    }
-    // const tabulationResult = minPathValsMatrixAllStartsTab(triangle);
-    console.log(overallMin);
+    // // let overallMin = minPathValsMatrixAllStartsRecursive(
+    // //     matrix.length - 1,
+    // //     0,
+    // //     matrix,
+    // //     cache
+    // // );
+    // for (let col = 1; col < matrix[0].length; col++) {
+    //     cache = [
+    //         [-1, -1, -1],
+    //         [-1, -1, -1],
+    //         [-1, -1, -1],
+    //     ];
+    //     const recursiveResult = minPathValsMatrixAllStartsRecursive(
+    //         matrix.length - 1,
+    //         col,
+    //         matrix,
+    //         cache
+    //     );
+    //     overallMin = Math.min(overallMin, recursiveResult);
+    // }
+    const tabulationResult = minPathValsMatrixAllStartsTab(matrix);
+    console.log(tabulationResult);
 }
 
 main();
