@@ -69,10 +69,24 @@ export default function main() {
 
     const cache: number[][][] = [];
     matrix.forEach(() => {
-        cache.push([[]]);
+        let row: number[][] = [];
+        matrix[0].forEach(() => {
+            let col: number[] = [];
+            matrix[0].forEach(() => {
+                col.push[-1];
+            });
+            row.push(col);
+        });
+        cache.push(row);
     });
 
-    const result = maxNinjaChocoRecursive(0, 0, 0, matrix, cache);
+    const result = maxNinjaChocoRecursive(
+        0,
+        0,
+        matrix[0].length,
+        matrix,
+        cache
+    );
     console.log(result);
 }
 
