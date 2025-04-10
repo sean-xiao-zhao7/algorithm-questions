@@ -67,18 +67,19 @@ export default function main() {
         [0, 8, 1, 13],
     ];
 
-    const cache: number[][][] = [];
+    let cache: number[][][] = [];
     matrix.forEach(() => {
         let row: number[][] = [];
         matrix[0].forEach(() => {
             let col: number[] = [];
             matrix[0].forEach(() => {
-                col.push[-1];
+                col.push(-1);
             });
             row.push(col);
         });
         cache.push(row);
     });
+    console.log(cache);
 
     const result = maxNinjaChocoRecursive(
         0,
