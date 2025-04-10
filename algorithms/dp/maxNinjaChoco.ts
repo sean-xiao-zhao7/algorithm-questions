@@ -33,6 +33,10 @@ function maxNinjaChocoRecursive(
             let currentMax = -1;
             const nextColNinja1 = ninja1Col + nextColNinja1Diff;
             const nextColNinja2 = ninja2Col + nextColNinja2Diff;
+            if (nextColNinja1 < 0 || nextColNinja2 > matrix[0].length) {
+                continue;
+            }
+
             if (nextColNinja1 === nextColNinja2) {
                 currentMax = matrix[row][nextColNinja1];
             } else {
