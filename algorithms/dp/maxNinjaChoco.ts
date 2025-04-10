@@ -33,7 +33,7 @@ function maxNinjaChocoRecursive(
             let currentMax = -1;
             const nextColNinja1 = ninja1Col + nextColNinja1Diff;
             const nextColNinja2 = ninja2Col + nextColNinja2Diff;
-            if (nextColNinja1 < 0 || nextColNinja2 > matrix[0].length) {
+            if (nextColNinja1 < 0 || nextColNinja2 >= matrix[0].length) {
                 continue;
             }
 
@@ -63,8 +63,8 @@ export default function main() {
     const matrix = [
         [1, 3, 12, 3],
         [2, 53, 1, 4],
-        [10, 9, 6, 10],
-        [0, 8, 1, 13],
+        // [10, 9, 6, 10],
+        // [0, 8, 1, 13],
     ];
 
     let cache: number[][][] = [];
@@ -79,12 +79,11 @@ export default function main() {
         });
         cache.push(row);
     });
-    console.log(cache);
 
     const result = maxNinjaChocoRecursive(
         0,
         0,
-        matrix[0].length,
+        matrix[0].length - 1,
         matrix,
         cache
     );
