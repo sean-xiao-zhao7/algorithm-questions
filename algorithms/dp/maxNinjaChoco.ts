@@ -57,13 +57,13 @@ function maxNinjaChocoRecursive(
 }
 
 export function maxNinjaChocoTab(
-    row: number,
+    rowInitial: number,
     ninja1Col: number,
     ninja2Col: number,
     matrix: number[][]
 ) {
     let dp: number[][][] = [];
-    matrix.forEach((_) => {
+    matrix.forEach((_, rowIdx) => {
         let row: number[][] = [];
         matrix[0].forEach((_) => {
             let col1: number[] = [];
@@ -74,7 +74,52 @@ export function maxNinjaChocoTab(
         });
         dp.push(row);
     });
-    console.log(dp);
+
+    for (let row = rowInitial; row < matrix.length; row++) {
+        let overAllMax = -1;
+        for (
+            let nextColNinja1Diff = -1;
+            nextColNinja1Diff < 2;
+            nextColNinja1Diff++
+        ) {
+            for (
+                let nextColNinja2Diff = -1;
+                nextColNinja2Diff < 2;
+                nextColNinja2Diff++
+            ) {
+                let currentMax = -1;
+
+                if (row === rowInitial) {
+                    if (ninja1Col === ninja2Col) {
+                        currentMax = matrix[row][ninja1Col];
+                    } else {
+                        currentMax =
+                            matrix[row][ninja1Col] + matrix[row][ninja2Col];
+                    }
+                } else {
+                    const nextColNinja1 = ninja1Col + nextColNinja1Diff;
+                    const nextColNinja2 = ninja2Col + nextColNinja2Diff;
+                    if (
+                        nextColNinja1 < 0 ||
+                        nextColNinja2 >= matrix[0].length
+                    ) {
+                        continue;
+                    }
+
+                    if (ninja1Col === ninja2Col) {
+                        currentMax = matrix[row][ninja1Col];
+                    } else {
+                        currentMax =
+                            matrix[row][ninja1Col] + matrix[row][ninja2Col];
+                    }
+                    currentMax += dp[row - 1][nextColNinja1][nextColNinja2];
+                }
+
+                overAllMax = Math.max(overAllMax, currentMax);
+                dp[row][]
+            }
+        }
+    }
 }
 
 export default function main() {
