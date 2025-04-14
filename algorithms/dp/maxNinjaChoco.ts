@@ -56,7 +56,26 @@ function maxNinjaChocoRecursive(
     return overAllMax;
 }
 
-export function maxNinjaChocoTab(matrix: number[][]) {}
+export function maxNinjaChocoTab(
+    row: number,
+    ninja1Col: number,
+    ninja2Col: number,
+    matrix: number[][]
+) {
+    let dp: number[][][] = [];
+    matrix.forEach((_) => {
+        let row: number[][] = [];
+        matrix[0].forEach((_) => {
+            let col1: number[] = [];
+            matrix[0].forEach((_) => {
+                col1.push(-1);
+            });
+            row.push(col1);
+        });
+        dp.push(row);
+    });
+    console.log(dp);
+}
 
 export default function main() {
     const matrix = [
@@ -79,13 +98,15 @@ export default function main() {
         cache.push(row);
     });
 
-    const result = maxNinjaChocoRecursive(
-        0,
-        0,
-        matrix[0].length - 1,
-        matrix,
-        cache
-    );
+    // const result = maxNinjaChocoRecursive(
+    //     0,
+    //     0,
+    //     matrix[0].length - 1,
+    //     matrix,
+    //     cache
+    // );
+
+    const result = maxNinjaChocoTab(0, 0, matrix[0].length - 1, matrix);
     console.log(result);
 }
 
