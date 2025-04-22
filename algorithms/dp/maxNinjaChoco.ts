@@ -58,8 +58,8 @@ function maxNinjaChocoRecursive(
 
 export function maxNinjaChocoTab(
     rowInitial: number,
-    ninja1Col: number,
-    ninja2Col: number,
+    initialNinja1Col: number,
+    initialNinja2Col: number,
     matrix: number[][]
 ) {
     let dp: number[][][] = [];
@@ -75,27 +75,15 @@ export function maxNinjaChocoTab(
         dp.push(row);
     });
 
+    let overAllMax = -1;
     for (let row = rowInitial; row < matrix.length; row++) {
-        let overAllMax = -1;
-        for (
-            let nextColNinja1Diff = -1;
-            nextColNinja1Diff < 2;
-            nextColNinja1Diff++
-        ) {
-            for (
-                let nextColNinja2Diff = -1;
-                nextColNinja2Diff < 2;
-                nextColNinja2Diff++
-            ) {
+        for (let col1 = 0; col1 < matrix[0].length; col1++) {
+            for (let col2 = 0; col2 < matrix[0].length; col2++) {
                 let currentMax = -1;
-
                 if (row === rowInitial) {
-                    if (ninja1Col === ninja2Col) {
-                        currentMax = matrix[row][ninja1Col];
-                    } else {
-                        currentMax =
-                            matrix[row][ninja1Col] + matrix[row][ninja2Col];
-                    }
+                    currentMax =
+                        matrix[row][initialNinja1Col] +
+                        matrix[row][initialNinja2Col];
                 } else {
                     const nextColNinja1 = ninja1Col + nextColNinja1Diff;
                     const nextColNinja2 = ninja2Col + nextColNinja2Diff;
@@ -105,7 +93,6 @@ export function maxNinjaChocoTab(
                     ) {
                         continue;
                     }
-
                     if (ninja1Col === ninja2Col) {
                         currentMax = matrix[row][ninja1Col];
                     } else {
@@ -114,12 +101,12 @@ export function maxNinjaChocoTab(
                     }
                     currentMax += dp[row - 1][nextColNinja1][nextColNinja2];
                 }
-
                 overAllMax = Math.max(overAllMax, currentMax);
-                dp[row][]
             }
         }
     }
+
+    return overAllMax;
 }
 
 export default function main() {
@@ -150,6 +137,43 @@ export default function main() {
     //     matrix,
     //     cache
     // );
+
+    // dp[0][0][length - 1]
+    // dp[1][0][length - 1]
+    // dp[1][1][length - 1]
+    // dp[1][0][length - 2]
+    // dp[1][1][length - 2]
+    // dp[2][0][length - 1]
+    // dp[2][1][length - 1]
+    // dp[2][0][length - 2]
+    // dp[2][1][length - 2]
+
+    [
+        [
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+        ],
+        [
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+        ],
+        [
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+        ],
+        [
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+        ],
+    ];
 
     const result = maxNinjaChocoTab(0, 0, matrix[0].length - 1, matrix);
     console.log(result);
