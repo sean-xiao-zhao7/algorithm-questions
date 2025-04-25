@@ -61,6 +61,29 @@ export function maxNinjaChocoTab(
     initialNinja2Col: number,
     matrix: number[][]
 ) {
+    const dp = buildDP(matrix);
+
+    const colWidth = matrix[0].length - 1;
+    let currentRowMax,
+        col1PrevMax,
+        col2PrevMax = -1;
+    for (let rowIdx = matrix.length - 1; rowIdx >= 0; rowIdx--) {
+        for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
+            for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {
+                // calc for col1 and col2 if both are distinct
+                // the max value from previous row and the columns directly below and adjacent the current column
+
+                currentRowMax = Math.max(
+                    currentRowMax,
+                    col1PrevMax + col2PrevMax
+                );
+            }
+        }
+    }
+    return dp[0][initialNinja1Col][initialNinja2Col];
+}
+
+function buildDP(matrix: number[][]) {
     let dp: number[][][] = [];
     matrix.forEach((_, rowIdx) => {
         let row: number[][] = [];
@@ -88,25 +111,7 @@ export function maxNinjaChocoTab(
         dp.push(row);
     });
     // console.log(dp);
-
-    const colWidth = matrix[0].length - 1;
-    let overAllMax,
-        currentRowMax,
-        col1PrevMax,
-        col2PrevMax = -1;
-    for (let rowIdx = matrix.length - 1; rowIdx >= 0; rowIdx--) {
-        for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
-            for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {
-                currentRowMax = Math.max(
-                    currentRowMax,
-                    col1PrevMax,
-                    col2PrevMax
-                );
-            }
-        }
-        overAllMax = Math.max(overAllMax, currentRowMax);
-    }
-    return overAllMax;
+    return dp;
 }
 
 export default function main() {
