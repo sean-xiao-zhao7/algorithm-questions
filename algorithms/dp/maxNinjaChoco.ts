@@ -89,12 +89,22 @@ export function maxNinjaChocoTab(
     });
     // console.log(dp);
 
-    let overAllMax = -1;
     const colWidth = matrix[0].length - 1;
+    let overAllMax,
+        currentRowMax,
+        col1PrevMax,
+        col2PrevMax = -1;
     for (let rowIdx = matrix.length - 1; rowIdx >= 0; rowIdx--) {
         for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
-            for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {}
+            for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {
+                currentRowMax = Math.max(
+                    currentRowMax,
+                    col1PrevMax,
+                    col2PrevMax
+                );
+            }
         }
+        overAllMax = Math.max(overAllMax, currentRowMax);
     }
     return overAllMax;
 }
