@@ -149,8 +149,8 @@ function buildDP(matrix: number[][]) {
 
 export default function main() {
     const matrix = [
-        // [1, 3, 12, 3],
-        // [2, 53, 1, 4],
+        [1, 3, 12, 3],
+        [2, 53, 1, 4],
         [10, 9, 6, 10],
         [0, 8, 1, 13],
     ];
