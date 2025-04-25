@@ -61,16 +61,15 @@ export function maxNinjaChocoTab(
     matrix: number[][]
 ) {
     const dp = buildDP(matrix);
-    console.log(dp);
     const colWidth = matrix[0].length - 1;
     for (let rowIdx = matrix.length - 2; rowIdx >= 0; rowIdx--) {
         // for each row, moving from last row to first
         // calc for col1 and col2 if both are distinct
         // the max value based on previous DP row's columns directly below and adjacent the current column
-        for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
-            for (let col2Idx = 0; col2Idx < colWidth; col2Idx++) {
+        for (let col1Idx = 0; col1Idx <= colWidth; col1Idx++) {
+            for (let col2Idx = 0; col2Idx <= colWidth; col2Idx++) {
                 dp[rowIdx][col1Idx][col2Idx] = calcMaxBelowAdj(
-                    dp[rowIdx - 1], // previous DP row max values
+                    dp[rowIdx + 1], // previous DP row max values
                     col1Idx,
                     col2Idx,
                     matrix[rowIdx][col1Idx],
@@ -80,6 +79,7 @@ export function maxNinjaChocoTab(
             }
         }
     }
+    console.log(dp);
     return dp[0][initialNinja1Col][initialNinja2Col];
 }
 
@@ -92,20 +92,25 @@ function calcMaxBelowAdj(
     colWidth: number
 ) {
     let prevCol1Idx = 0,
-        preCol2Idx = 0,
+        prevCol2Idx = 0,
         overAllMax = 0;
     for (let preCol1Diff = -1; preCol1Diff <= 1; preCol1Diff++) {
         for (let preCol2Diff = -1; preCol2Diff <= 1; preCol2Diff++) {
             // Given all possibilities of previous DP row's col1 and col2
             // Find the single max combined with current row's col1 and col2
             prevCol1Idx = col1Idx + preCol1Diff;
-            preCol2Idx = col2Idx + preCol2Diff;
-            if (prevCol1Idx < 0 || preCol2Idx >= colWidth) {
+            prevCol2Idx = col2Idx + preCol2Diff;
+            if (
+                prevCol1Idx < 0 ||
+                prevCol2Idx < 0 ||
+                prevCol1Idx > colWidth ||
+                prevCol2Idx > colWidth
+            ) {
                 continue; // out of bounds, no previous DP row value exists for this col1 and col2
             }
             overAllMax = Math.max(
                 overAllMax,
-                dpPrevRow[prevCol1Idx][preCol2Idx] +
+                dpPrevRow[prevCol1Idx][prevCol2Idx] +
                     (col1Idx === col2Idx ? co1Val : co1Val + col2Val)
             );
         }
@@ -144,8 +149,8 @@ function buildDP(matrix: number[][]) {
 
 export default function main() {
     const matrix = [
-        [1, 3, 12, 3],
-        [2, 53, 1, 4],
+        // [1, 3, 12, 3],
+        // [2, 53, 1, 4],
         [10, 9, 6, 10],
         [0, 8, 1, 13],
     ];
