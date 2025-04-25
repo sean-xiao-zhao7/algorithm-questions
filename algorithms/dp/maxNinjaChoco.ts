@@ -18,7 +18,6 @@ function maxNinjaChocoRecursive(
         if (ninja1Col === ninja2Col) return matrix[row][ninja1Col];
         else return matrix[row][ninja1Col] + matrix[row][ninja2Col];
     }
-
     let overAllMax = -1;
     for (
         let nextColNinja1Diff = -1;
@@ -62,16 +61,16 @@ export function maxNinjaChocoTab(
     matrix: number[][]
 ) {
     const dp = buildDP(matrix);
-
+    console.log(dp);
     const colWidth = matrix[0].length - 1;
-    for (let rowIdx = matrix.length - 1; rowIdx >= 0; rowIdx--) {
+    for (let rowIdx = matrix.length - 2; rowIdx >= 0; rowIdx--) {
         // for each row, moving from last row to first
         // calc for col1 and col2 if both are distinct
         // the max value based on previous DP row's columns directly below and adjacent the current column
         for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
-            for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {
+            for (let col2Idx = 0; col2Idx < colWidth; col2Idx++) {
                 dp[rowIdx][col1Idx][col2Idx] = calcMaxBelowAdj(
-                    dp[rowIdx],
+                    dp[rowIdx - 1], // previous DP row max values
                     col1Idx,
                     col2Idx,
                     matrix[rowIdx][col1Idx],
@@ -85,15 +84,15 @@ export function maxNinjaChocoTab(
 }
 
 function calcMaxBelowAdj(
-    dpRow: number[][],
+    dpPrevRow: number[][],
     col1Idx: number,
     col2Idx: number,
     co1Val: number,
     col2Val: number,
     colWidth: number
 ) {
-    let prevCol1Idx,
-        preCol2Idx,
+    let prevCol1Idx = 0,
+        preCol2Idx = 0,
         overAllMax = 0;
     for (let preCol1Diff = -1; preCol1Diff <= 1; preCol1Diff++) {
         for (let preCol2Diff = -1; preCol2Diff <= 1; preCol2Diff++) {
@@ -101,13 +100,12 @@ function calcMaxBelowAdj(
             // Find the single max combined with current row's col1 and col2
             prevCol1Idx = col1Idx + preCol1Diff;
             preCol2Idx = col2Idx + preCol2Diff;
-            if (preCol1Diff < 0 || preCol2Diff >= colWidth) {
+            if (prevCol1Idx < 0 || preCol2Idx >= colWidth) {
                 continue; // out of bounds, no previous DP row value exists for this col1 and col2
             }
-
             overAllMax = Math.max(
                 overAllMax,
-                dpRow[prevCol1Idx][preCol2Idx] +
+                dpPrevRow[prevCol1Idx][preCol2Idx] +
                     (col1Idx === col2Idx ? co1Val : co1Val + col2Val)
             );
         }
@@ -139,10 +137,8 @@ function buildDP(matrix: number[][]) {
             });
             row.push(col1);
         });
-
         dp.push(row);
     });
-    // console.log(dp);
     return dp;
 }
 
