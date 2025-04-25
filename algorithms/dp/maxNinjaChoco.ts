@@ -71,11 +71,12 @@ export function maxNinjaChocoTab(
         for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
             for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {
                 dp[rowIdx][col1Idx][col2Idx] = calcMaxBelowAdj(
-                    dp,
+                    dp[rowIdx],
                     col1Idx,
                     col2Idx,
-                    matrix[row][col1Idx],
-                    matrix[row][col2Idx]
+                    matrix[rowIdx][col1Idx],
+                    matrix[rowIdx][col2Idx],
+                    colWidth
                 );
             }
         }
@@ -84,17 +85,34 @@ export function maxNinjaChocoTab(
 }
 
 function calcMaxBelowAdj(
-    dp: number[][][],
+    dpRow: number[][],
     col1Idx: number,
     col2Idx: number,
     co1Val: number,
-    col2Val: number
+    col2Val: number,
+    colWidth: number
 ) {
-    let col2Max = 0;
-    col2Max += matrix[rowIdx][col2Idx];
-    let col1Max = 0;
-    col1Max += matrix[rowIdx][col1Idx];
-    col1Max += Math.max(dp[rowIdx + 1][col1Idx - 1]);
+    let prevCol1Idx,
+        preCol2Idx,
+        overAllMax = 0;
+    for (let preCol1Diff = -1; preCol1Diff <= 1; preCol1Diff++) {
+        for (let preCol2Diff = -1; preCol2Diff <= 1; preCol2Diff++) {
+            // Given all possibilities of previous DP row's col1 and col2
+            // Find the single max combined with current row's col1 and col2
+            prevCol1Idx = col1Idx + preCol1Diff;
+            preCol2Idx = col2Idx + preCol2Diff;
+            if (preCol1Diff < 0 || preCol2Diff >= colWidth) {
+                continue; // out of bounds, no previous DP row value exists for this col1 and col2
+            }
+
+            overAllMax = Math.max(
+                overAllMax,
+                dpRow[prevCol1Idx][preCol2Idx] +
+                    (col1Idx === col2Idx ? co1Val : co1Val + col2Val)
+            );
+        }
+    }
+    return overAllMax;
 }
 
 function buildDP(matrix: number[][]) {
