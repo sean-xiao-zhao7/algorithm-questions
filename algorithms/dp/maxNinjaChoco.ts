@@ -87,9 +87,15 @@ export function maxNinjaChocoTab(
 
         dp.push(row);
     });
-    console.log(dp);
-    let overAllMax = -1;
+    // console.log(dp);
 
+    let overAllMax = -1;
+    const colWidth = matrix[0].length - 1;
+    for (let rowIdx = matrix.length - 1; rowIdx >= 0; rowIdx--) {
+        for (let col1Idx = 0; col1Idx < colWidth; col1Idx++) {
+            for (let col2Idx = 0; col1Idx < colWidth; col2Idx++) {}
+        }
+    }
     return overAllMax;
 }
 
