@@ -7,55 +7,12 @@
 function countPalindromesInStringRecursive(
     input: string,
     cache: { string: boolean } | {}
-) {
-    const length = input.length;
-    if (length == 1) {
-        return 0;
-    }
-
-    if (cache[input]) {
-        return 0;
-    } else {
-        cache[input] = true;
-    }
-
-    const currentResult: number = isPalindrome(input, cache);
-    const totalStartingThisChar =
-        currentResult +
-        countPalindromesInStringRecursive(input.slice(0, length - 1), cache);
-    const totalWithoutThisChar = countPalindromesInStringRecursive(
-        input.slice(1, length),
-        cache
-    );
-    return totalStartingThisChar + totalWithoutThisChar;
-}
+) {}
 
 function countPalindromesInStringTabulation(
     input: string,
     cache: { string: boolean } | {}
-) {
-    const iterations: number[][] = [];
-    iterations[0] = [];
-    iterations[0][0] = 1; // totalStartingThisChar
-    iterations[0][1] = 0; // totalWithoutThisChar
-    for (let length = 1; length < input.length + 1; length++) {
-        iterations[length] = [];
-
-        const currentString = input.slice(0, length - 1);
-        let currentResult: number = isPalindrome(currentString, cache);
-        const totalStartingThisChar = currentResult + iterations[length - 1][0];
-        iterations[length][0] = totalStartingThisChar;
-
-        const remainingString = currentString.slice(1, currentString.length);
-        currentResult = isPalindrome(remainingString, cache);
-        const totalWithoutThisChar = currentResult + iterations[length - 1][1];
-        iterations[length][1] = totalWithoutThisChar;
-
-        console.log(currentString);
-        console.log(iterations);
-    }
-    return iterations[input.length][0] + iterations[input.length][1];
-}
+) {}
 
 function isPalindrome(input: string, cache: { string: boolean } | {}) {
     const result = 1;
@@ -72,8 +29,8 @@ function isPalindrome(input: string, cache: { string: boolean } | {}) {
 
 export default function main() {
     const stringInput = "aabba";
-    return countPalindromesInStringTabulation(stringInput, {});
-    // return (
-    //     stringInput.length + countPalindromesInStringTa(stringInput, {})
-    // );
+    const result = countPalindromesInStringTabulation(stringInput, {});
+    console.log("Total palindromes is " + result);
 }
+
+main();
