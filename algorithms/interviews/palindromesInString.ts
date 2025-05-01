@@ -15,7 +15,7 @@ function countPalindromesInStringRecursive(
     }
 
     const isCurrentPalidrome = isPalindrome(input);
-    console.log(startIdx, endIdx, input);
+    if (isCurrentPalidrome) console.log(startIdx, endIdx, input);
     cache[startIdx][endIdx] = isCurrentPalidrome;
 
     if (input.length === 2) {
@@ -71,7 +71,6 @@ export default function main() {
             stringInput.length - 1
         ) + stringInput.length;
     console.log("Total palindromes is " + result);
-    console.log(cache);
 }
 
 main();
