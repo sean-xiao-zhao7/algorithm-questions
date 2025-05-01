@@ -56,7 +56,7 @@ function countPalindromesInStringTabulation(
 ) {}
 
 export default function main() {
-    const stringInput = ["a", "a", "b", "b", "a"];
+    const stringInput = ["a", "a", "b", "b", "a", "a", "a", "b"];
     const cache: number[][] = [];
     stringInput.forEach((_, idx) => {
         const endIdxArray: number[] = [];
