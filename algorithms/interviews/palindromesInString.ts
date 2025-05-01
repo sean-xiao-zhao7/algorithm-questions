@@ -10,15 +10,17 @@ function countPalindromesInStringRecursive(
     startIdx: number,
     endIdx: number
 ) {
-    if (input.length === 2) {
-        return isPalindrome(input);
-    }
     if (cache[startIdx][endIdx] !== -1) {
         return 0;
     }
 
     const isCurrentPalidrome = isPalindrome(input);
+    console.log(startIdx, endIdx, input);
     cache[startIdx][endIdx] = isCurrentPalidrome;
+
+    if (input.length === 2) {
+        return isCurrentPalidrome;
+    }
 
     let removeFirstCount = 0,
         removeLastCount = 0;
@@ -45,7 +47,6 @@ function isPalindrome(input: string[]) {
         start++;
         end--;
     }
-    console.log(input);
     return 1;
 }
 
