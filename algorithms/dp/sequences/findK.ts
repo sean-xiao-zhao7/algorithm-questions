@@ -5,7 +5,7 @@
  * @param k the target.
  * @returns able integer if k can be summed up to.
  */
-function findK(array: number[], k: number) {
+function findKRecursive(array: number[], k: number) {
     if (k === 0) {
         return true;
     }
@@ -25,14 +25,16 @@ function findK(array: number[], k: number) {
     // consider current element
     const remainingSum = k - array[0];
     const remainingArray = array.slice(1);
-    const considerResult = findK(remainingArray, remainingSum);
-    const dontConsiderResult = findK(remainingArray, k);
+
+    const considerResult = findKRecursive(remainingArray, remainingSum);
+    const dontConsiderResult = findKRecursive(remainingArray, k);
+
     return considerResult || dontConsiderResult;
 }
 
 export default function main() {
     const array = [1, 3, 12, 3, 2, 53, 1, 4];
-    const result = findK(array, 50);
+    const result = findKRecursive(array, 50);
     console.log(result);
 }
 
