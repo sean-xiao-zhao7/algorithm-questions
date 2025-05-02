@@ -6,7 +6,7 @@
  * @returns able integer if k can be summed up to.
  */
 function findKRecursive(array: number[], k: number, cache: number[][]) {
-    if (k < 0) {
+    if (k < 0 || k < array[0]) {
         return false;
     }
 
@@ -39,6 +39,17 @@ function findKRecursive(array: number[], k: number, cache: number[][]) {
     return overallResult;
 }
 
+function findKTabulation(array: number[], target: number) {
+    const dp: number[][] = [];
+    array.forEach((_) => {
+        const row: number[] = [];
+        for (let idx = 0; idx < target + 1; idx++) {
+            row[idx] = -1;
+        }
+        dp.push(row);
+    });
+}
+
 export default function main() {
     const array = [1, 3, 12, 3, 2, 53, 1, 4];
     const target = 5;
@@ -50,7 +61,8 @@ export default function main() {
         }
         cache.push(row);
     });
-    const result = findKRecursive(array, target, cache);
+    // const result = findKRecursive(array, target, cache);
+    const result = findKTabulation(array, target);
     console.log(result, cache);
 }
 
