@@ -64,7 +64,7 @@ export default function main() {
     const array = [1, 3, 12, 3, 2, 53, 1, 4];
     // const array = [1, 3]
     // cache(1, 5) = cache(0, 5) || cache(0, 5 - 3);
-    const target = 17;
+    const target = 6;
     const cache: number[][] = [];
     array.forEach((_) => {
         const row: number[] = [];
