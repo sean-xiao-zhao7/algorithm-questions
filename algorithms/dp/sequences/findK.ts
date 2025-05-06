@@ -47,14 +47,14 @@ function findKTabulation(
     cache: number[][]
 ) {
     for (let idxArray = 1; idxArray < array.length; idxArray++) {
-        for (let target = 1; target < initialTarget; target++) {
+        for (let target = 1; target <= initialTarget; target++) {
             const remainingSum = target - array[idxArray];
             const considerResult = cache[idxArray - 1][remainingSum];
             const dontConsiderResult = cache[idxArray - 1][target];
             cache[idxArray][target] = considerResult || dontConsiderResult;
         }
     }
-    return cache[cache.length - 1][cache[0].length - 1];
+    return cache[array.length - 1][initialTarget];
 }
 
 /**
@@ -66,9 +66,18 @@ export default function main() {
     // cache(1, 5) = cache(0, 5) || cache(0, 5 - 3);
     const target = 17;
     const cache: number[][] = [];
-    array.forEach((_, idxArray) => {
+    array.forEach((_) => {
         const row: number[] = [];
-        for (let idx = 0; idx < target; idx++) {
+        for (let idx = 0; idx <= target; idx++) {
+            row[idx] = -1;
+        }
+        cache.push(row);
+    });
+
+    const dp: number[][] = [];
+    array.forEach((_) => {
+        const row: number[] = [];
+        for (let idx = 0; idx <= target; idx++) {
             // base case
             // if (k === 0) {
             //     return true;
@@ -79,7 +88,7 @@ export default function main() {
                 row[idx] = -1;
             }
         }
-        cache.push(row);
+        dp.push(row);
     });
     // base case
     // if (array.length === 1) {
@@ -90,11 +99,12 @@ export default function main() {
     //     }
     // }
     if (array[0] < array.length) {
-        cache[0][array[0]] = 1;
+        dp[0][array[0]] = 1;
     }
 
     const recursiveResult = findKRecursive(array, target, cache);
-    const tabResult = findKTabulation(array, target, cache);
+    const tabResult = findKTabulation(array, target, dp);
+    console.log(dp);
     console.log(
         `Recursive result is ${recursiveResult}\n`,
         `Tabulation result is ${tabResult}`
