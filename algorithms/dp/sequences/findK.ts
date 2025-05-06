@@ -54,7 +54,7 @@ function findKTabulation(
             cache[idxArray][target] = considerResult || dontConsiderResult;
         }
     }
-    return cache[length - 1][cache[0].length - 1];
+    return cache[cache.length - 1][cache[0].length - 1];
 }
 
 /**
@@ -64,7 +64,7 @@ export default function main() {
     const array = [1, 3, 12, 3, 2, 53, 1, 4];
     // const array = [1, 3]
     // cache(1, 5) = cache(0, 5) || cache(0, 5 - 3);
-    const target = 5;
+    const target = 17;
     const cache: number[][] = [];
     array.forEach((_, idxArray) => {
         const row: number[] = [];
@@ -93,9 +93,12 @@ export default function main() {
         cache[0][array[0]] = 1;
     }
 
-    // const result = findKRecursive(array, target, cache);
-    const result = findKTabulation(array, target, cache);
-    console.log(result);
+    const recursiveResult = findKRecursive(array, target, cache);
+    const tabResult = findKTabulation(array, target, cache);
+    console.log(
+        `Recursive result is ${recursiveResult}\n`,
+        `Tabulation result is ${tabResult}`
+    );
 }
 
 main();
