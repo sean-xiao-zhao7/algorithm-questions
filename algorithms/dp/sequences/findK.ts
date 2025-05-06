@@ -44,8 +44,7 @@ export default function main() {
     array.forEach((_, idxArray) => {
         const row: number[] = [];
         for (let idx = 0; idx < target; idx++) {
-            // base cases
-
+            // base case
             // if (k === 0) {
             //     return true;
             // }
@@ -57,6 +56,7 @@ export default function main() {
         }
         cache.push(row);
     });
+    // base case
     // if (array.length === 1) {
     //     if (array[0] === k) {
     //         return true;
@@ -64,7 +64,9 @@ export default function main() {
     //         return false;
     //     }
     // }
-    cache[0][array[0]] = 1;
+    if (array[0] < array.length) {
+        cache[0][array[0]] = 1;
+    }
 
     // const result = findKRecursive(array, target, cache);
     const result = findKTabulation(array, target, cache);
