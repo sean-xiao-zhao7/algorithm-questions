@@ -50,7 +50,7 @@ function findKTabulation(
         for (let target = 1; target < initialTarget; target++) {
             const remainingSum = target - array[idxArray];
             const considerResult = cache[idxArray - 1][remainingSum];
-            const dontConsiderResult = cache[idxArray][target];
+            const dontConsiderResult = cache[idxArray - 1][target];
             cache[idxArray][target] = considerResult || dontConsiderResult;
         }
     }
