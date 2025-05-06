@@ -35,10 +35,35 @@ function findKRecursive(array: number[], k: number, cache: number[][]) {
     return overallResult;
 }
 
-function findKTabulation(array: number[], target: number, cache: number[][]) {}
+/**
+ * Bottom up. From array of length 1 and target of 0, to length of N and target of "target".
+ * @param array
+ * @param target
+ * @param cache
+ */
+function findKTabulation(
+    array: number[],
+    initialTarget: number,
+    cache: number[][]
+) {
+    for (let idxArray = 1; idxArray < array.length; idxArray++) {
+        for (let target = 1; target < initialTarget; target++) {
+            const remainingSum = target - array[idxArray];
+            const considerResult = cache[idxArray - 1][remainingSum];
+            const dontConsiderResult = cache[idxArray][target];
+            cache[idxArray][target] = considerResult || dontConsiderResult;
+        }
+    }
+    return cache[length - 1][cache[0].length - 1];
+}
 
+/**
+ * Main exec, with some input preparation.
+ */
 export default function main() {
     const array = [1, 3, 12, 3, 2, 53, 1, 4];
+    // const array = [1, 3]
+    // cache(1, 5) = cache(0, 5) || cache(0, 5 - 3);
     const target = 5;
     const cache: number[][] = [];
     array.forEach((_, idxArray) => {
@@ -70,7 +95,7 @@ export default function main() {
 
     // const result = findKRecursive(array, target, cache);
     const result = findKTabulation(array, target, cache);
-    console.log(result, cache);
+    console.log(result);
 }
 
 main();
