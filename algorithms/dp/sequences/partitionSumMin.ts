@@ -1,7 +1,8 @@
 /**
- * Determine if input array can be partitioned by 2, where each sub-array sums to the same sum.
+ * Determine the minimal sum differences between any 2 way partitions.
  *
  * @param array integer 1D array.
+ * @returns min integer the minimum difference between partitions
  */
 function partitionSumMinRecursive(array: number[], targetSum: number) {
     if (targetSum === 0) {
@@ -21,12 +22,6 @@ function partitionSumMinRecursive(array: number[], targetSum: number) {
 
     return takeCurrentBool || dontTakeCurrentBool;
 }
-
-/**
- * Bottom up. From array of length 1 and target of 0, to length of N and target of "target".
- * @param array
- */
-function partitionSumRTabulation() {}
 
 /**
  * Main exec, with some input preparation.
