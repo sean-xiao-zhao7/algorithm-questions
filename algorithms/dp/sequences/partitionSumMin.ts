@@ -4,15 +4,12 @@
  * @param array integer 1D array.
  * @returns min integer the minimum difference between partitions
  */
-function partitionSumMinRecursive(dpArray: number[][]) {
+function partitionSumMin(dpArray: number[][]) {
     const lastDPRow = dpArray[dpArray.length - 1];
-    let minSumDiff = -1;
-    for (let idx = 0; idx < dpArray.length / 2; idx++) {
+    let minSumDiff = lastDPRow.length;
+    for (let idx = 0; idx <= lastDPRow.length / 2 + 1; idx++) {
         if (lastDPRow[idx] === 1) {
-            minSumDiff = Math.min(
-                minSumDiff,
-                lastDPRow[lastDPRow.length - 1] - idx
-            );
+            minSumDiff = Math.min(minSumDiff, lastDPRow.length - idx - idx);
         }
     }
     return minSumDiff;
@@ -63,8 +60,8 @@ export default function main() {
     // 18, 17, ...
     const entireSum = array.reduce((x, c) => x + c, 0);
     const dp = makeFindKDP(array, entireSum);
-    const recursiveResult = partitionSumMinRecursive(dp);
-    console.log(recursiveResult);
+    const result = partitionSumMin(dp);
+    console.log(result);
 }
 
 main();
