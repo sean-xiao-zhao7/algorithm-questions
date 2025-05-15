@@ -38,26 +38,17 @@ function makeFindKDP(array: number[], initialTarget: number) {
         }
         dp.push(row);
     });
-    if (array[0] === initialTarget) {
-        array[0][initialTarget] = 1;
-    }
+    dp[0][array[0]] = 1;
 
     for (let idxArray = 1; idxArray < array.length; idxArray++) {
         for (let target = 1; target <= initialTarget; target++) {
             const remainingSum = target - array[idxArray];
-            if (remainingSum === 0) {
-                dp[idxArray][target] = 1;
-            } else {
-                let considerResult = -1,
-                    dontConsiderResult = -1;
-                if (remainingSum > 0) {
-                    considerResult = dp[idxArray - 1][remainingSum];
-                }
-                dontConsiderResult = dp[idxArray - 1][target];
-                dp[idxArray][target] = considerResult || dontConsiderResult;
-            }
+            const considerResult = dp[idxArray - 1][remainingSum];
+            const dontConsiderResult = dp[idxArray - 1][target];
+            dp[idxArray][target] = considerResult || dontConsiderResult;
         }
     }
+    console.log(dp);
     return dp;
 }
 
@@ -71,6 +62,7 @@ export default function main() {
     // 18, 17, ...
     const entireSum = array.reduce((x, c) => x + c, 0);
     const dp = makeFindKDP(array, entireSum);
+    // console.log(dp);
     const result = partitionSumMin(dp);
     console.log(result);
 }
