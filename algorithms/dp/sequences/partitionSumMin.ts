@@ -6,10 +6,11 @@
  */
 function partitionSumMin(dpArray: number[][]) {
     const lastDPRow = dpArray[dpArray.length - 1];
-    let minSumDiff = lastDPRow.length;
-    for (let idx = 0; idx <= lastDPRow.length / 2 + 1; idx++) {
+    const maxDiff = lastDPRow.length - 1;
+    let minSumDiff = maxDiff;
+    for (let idx = 1; idx <= Math.ceil((lastDPRow.length - 1) / 2); idx++) {
         if (lastDPRow[idx] === 1) {
-            minSumDiff = Math.min(minSumDiff, lastDPRow.length - idx - idx);
+            minSumDiff = Math.min(minSumDiff, maxDiff - idx - idx);
         }
     }
     return minSumDiff;
@@ -73,7 +74,6 @@ export default function main() {
     // 18, 17, ...
     const entireSum = array.reduce((x, c) => x + c, 0);
     const dp = makeFindKDP(array, entireSum);
-    // console.log(dp);
     const result = partitionSumMin(dp);
     console.log(result);
 }
