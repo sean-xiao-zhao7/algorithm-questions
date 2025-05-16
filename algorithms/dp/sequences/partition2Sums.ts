@@ -3,48 +3,44 @@
  *
  * @param array integer 1D array.
  * @param initialTarget integer the target.
- * @param result Object that contains all arrays that sums up to target.
- * @param currentSeq temporary variable to store numbers seen so far.
+ * @returns integer the number of subsets that sum up to initial target.
  */
 function partition2Sums(
     array: number[],
     initialTarget: number,
-    result: { arrays: number[][]; count: number },
-    currentSeq: number[]
+    cache: number[][]
 ) {
     const length = array.length;
     const currentElement = array[0];
+
+    if (cache[length][initialTarget] !== 0) {
+        return cache[length][initialTarget];
+    }
+
     if (length === 1) {
         if (currentElement === initialTarget) {
-            result.arrays.push(array);
-            result.count++;
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 
     if (currentElement === initialTarget) {
-        result.arrays.push([array[0]]);
-        result.count++;
+        return 1;
     }
 
     if (initialTarget === 0) {
-        result.arrays.push(currentSeq);
-        result.count++;
-        return true;
+        return 1;
     }
 
     const remainingArray = array.slice(1);
-    const remainingSum = initialTarget - currentElement;
     // don't take current element
-    partition2Sums(remainingArray, initialTarget, result, currentSeq);
+    const sum1 = partition2Sums(remainingArray, initialTarget, cache);
     // take current element
-    partition2Sums(remainingArray, remainingSum, result, [
-        ...currentSeq,
-        currentElement,
-    ]);
-
+    const remainingSum = initialTarget - currentElement;
+    const sum2 = partition2Sums(remainingArray, remainingSum, cache);
     // const array = [1, 2, 2, 3];
+    cache[length][initialTarget] = sum1 + sum2;
+    return sum1 + sum2;
 }
 
 /**
@@ -52,9 +48,19 @@ function partition2Sums(
  */
 export default function main() {
     const array = [1, 2, 2, 3];
-    const arrays: number[][] = [];
-    const result = { arrays, count: 0 };
-    partition2Sums(array, 3, result, []);
+    const target = 3;
+
+    // Memoization
+    const cache: number[][] = [];
+    array.forEach(() => {
+        const row: number[] = [];
+        for (let i = 0; i <= target; i++) {
+            row[i] = 0;
+        }
+        cache.push(row);
+    });
+
+    const result = partition2Sums(array, target, cache);
     console.log(result);
 }
 
