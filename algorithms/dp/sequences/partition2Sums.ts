@@ -43,6 +43,46 @@ function partition2Sums(
 }
 
 /**
+ * Tabulation. Determine if any subset can sum up to target.
+ *
+ * @param array integer 1D array.
+ * @param initialTarget integer the target.
+ * @returns integer the number of subsets that sum up to initial target.
+ */
+function partition2SumsTab(array: number[], initialTarget: number) {
+    const dp: number[][] = [];
+    array.forEach(() => {
+        const row: number[] = [];
+        for (let idx = 0; idx <= initialTarget; idx++) {
+            if (idx === 0) {
+                row[idx] = 1;
+            } else {
+                row[idx] = 0;
+            }
+        }
+        dp.push(row);
+    });
+    if (array[0] < initialTarget) {
+        dp[0][array[0]] = 1;
+    }
+
+    dp.forEach((row, idx) => {
+        row.forEach((_, targetIdx) => {
+            if (idx > 0 && targetIdx > 0) {
+                const notTakeCurrent = dp[idx - 1][targetIdx];
+                let takeCurrent = 0;
+                if (array[idx] <= targetIdx) {
+                    takeCurrent = dp[idx - 1][targetIdx - array[idx]];
+                }
+                dp[idx][targetIdx] = takeCurrent + notTakeCurrent;
+            }
+        });
+    });
+
+    return dp[array.length - 1][initialTarget];
+}
+
+/**
  * Main exec, with some input preparation.
  */
 export default function main() {
@@ -59,7 +99,8 @@ export default function main() {
         cache.push(row);
     });
 
-    const result = partition2Sums(array, target, cache);
+    // const result = partition2Sums(array, target, cache);
+    const result = partition2SumsTab(array, target);
     console.log(result);
 }
 
