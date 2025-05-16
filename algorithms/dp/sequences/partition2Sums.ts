@@ -11,11 +11,8 @@ function partition2Sums(
     cache: number[][]
 ) {
     const length = array.length;
+    const arrayIdx = length - 1;
     const currentElement = array[0];
-
-    if (cache[length][initialTarget] !== 0) {
-        return cache[length][initialTarget];
-    }
 
     if (length === 1) {
         if (currentElement === initialTarget) {
@@ -24,22 +21,24 @@ function partition2Sums(
         return 0;
     }
 
-    if (currentElement === initialTarget) {
+    if (initialTarget === 0) {
         return 1;
     }
 
-    if (initialTarget === 0) {
-        return 1;
+    if (cache[arrayIdx][initialTarget] !== -1) {
+        return cache[arrayIdx][initialTarget];
     }
 
     const remainingArray = array.slice(1);
     // don't take current element
     const sum1 = partition2Sums(remainingArray, initialTarget, cache);
     // take current element
-    const remainingSum = initialTarget - currentElement;
-    const sum2 = partition2Sums(remainingArray, remainingSum, cache);
-    // const array = [1, 2, 2, 3];
-    cache[length][initialTarget] = sum1 + sum2;
+    let sum2 = 0;
+    if (currentElement < initialTarget) {
+        const remainingSum = initialTarget - currentElement;
+        sum2 = partition2Sums(remainingArray, remainingSum, cache);
+    }
+    cache[arrayIdx][initialTarget] = sum1 + sum2;
     return sum1 + sum2;
 }
 
@@ -55,7 +54,7 @@ export default function main() {
     array.forEach(() => {
         const row: number[] = [];
         for (let i = 0; i <= target; i++) {
-            row[i] = 0;
+            row[i] = -1;
         }
         cache.push(row);
     });
