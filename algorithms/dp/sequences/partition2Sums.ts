@@ -14,15 +14,15 @@ function partition2Sums(
     const arrayIdx = length - 1;
     const currentElement = array[0];
 
+    if (initialTarget === 0) {
+        return 1;
+    }
+
     if (length === 1) {
         if (currentElement === initialTarget) {
             return 1;
         }
         return 0;
-    }
-
-    if (initialTarget === 0) {
-        return 1;
     }
 
     if (cache[arrayIdx][initialTarget] !== -1) {
@@ -34,7 +34,7 @@ function partition2Sums(
     const sum1 = partition2Sums(remainingArray, initialTarget, cache);
     // take current element
     let sum2 = 0;
-    if (currentElement < initialTarget) {
+    if (currentElement <= initialTarget) {
         const remainingSum = initialTarget - currentElement;
         sum2 = partition2Sums(remainingArray, remainingSum, cache);
     }
